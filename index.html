@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Python Adventures — Learn Python Through Stories</title>
-<meta name="description" content="A magical storybook where kids learn Python through interactive stories with 3D animations">
+<title>Python Adventures — Learn Python Through Magical Stories</title>
+<meta name="description" content="A magical storybook where kids learn Python through interactive stories with beautiful infographics">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -23,12 +23,12 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 ::-webkit-scrollbar-thumb{background:var(--purple);border-radius:4px}
 
 /* ===== THREE.JS CANVAS ===== */
-#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.4}
 #app{position:relative;z-index:1}
 
 /* ===== LOADING SCREEN ===== */
 #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
-#loader.hidden{opacity:0;visibility:hidden}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .loader-book{font-size:72px;animation:bookBounce 1s ease-in-out infinite}
 .loader-text{margin-top:20px;font-size:20px;color:var(--gold);font-weight:500}
 .loader-bar{width:200px;height:4px;background:rgba(255,255,255,.1);border-radius:4px;margin-top:16px;overflow:hidden}
@@ -36,55 +36,54 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 @keyframes bookBounce{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(5deg)}}
 @keyframes loadFill{0%{width:0}100%{width:100%}}
 
-/* ===== HEADER / HERO ===== */
-.hero{text-align:center;padding:100px 24px 60px;position:relative}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);border-radius:999px;padding:8px 20px;font-size:14px;color:var(--purple);margin-bottom:24px;backdrop-filter:blur(8px)}
-.hero h1{font-size:clamp(36px,7vw,72px);font-weight:700;line-height:1.1;margin-bottom:16px}
-.hero h1 .magic{background:linear-gradient(135deg,var(--gold),var(--pink),var(--purple),var(--cyan));-webkit-background-clip:text;-webkit-text-color:transparent;background-clip:text;color:transparent;animation:gradientShift 4s ease infinite}
+/* ===== HERO ===== */
+.hero{text-align:center;padding:80px 24px 40px;position:relative;max-width:800px;margin:0 auto}
+.hero h1{font-size:clamp(40px,8vw,80px);font-weight:700;line-height:1.1;margin-bottom:12px}
+.hero h1 .magic{background:linear-gradient(135deg,var(--gold),var(--pink),var(--purple),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;background-size:300% 300%;animation:gradientShift 4s ease infinite}
 @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.hero h1 .magic{background-size:300% 300%}
-.hero-sub{font-size:clamp(16px,2.5vw,22px);color:var(--text-dim);max-width:600px;margin:0 auto 32px;line-height:1.6;font-weight:300}
-.hero-emoji{font-size:48px;margin-bottom:16px;display:block}
-.scroll-hint{display:inline-flex;flex-direction:column;align-items:center;gap:8px;color:var(--gold);font-size:14px;animation:float 2s ease-in-out infinite;cursor:pointer;text-decoration:none}
-.scroll-hint svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:2}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.hero-sub{font-size:clamp(16px,2.5vw,20px);color:var(--text-dim);max-width:560px;margin:0 auto 24px;line-height:1.6;font-weight:300}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);border-radius:999px;padding:8px 20px;font-size:14px;color:var(--purple);margin-bottom:20px;backdrop-filter:blur(8px)}
 
-/* ===== CHAPTER NAV ===== */
-.chapter-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:20px 24px 40px;max-width:900px;margin:0 auto}
-.chapter-btn{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:16px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:all .3s;backdrop-filter:blur(8px)}
-.chapter-btn:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08);transform:translateY(-2px)}
-.chapter-btn.active{border-color:var(--active-color,var(--purple));background:rgba(139,92,246,.15);color:white;box-shadow:0 4px 20px rgba(139,92,246,.2)}
-.chapter-btn .ch-emoji{font-size:22px}
-.chapter-btn .ch-num{font-size:11px;opacity:.6;display:block;text-align:left}
+/* ===== HOMEPAGE: STORY CARDS GRID ===== */
+.home-section{max-width:1100px;margin:0 auto;padding:0 20px 60px}
+.home-section h2{text-align:center;font-size:24px;color:var(--gold);margin-bottom:32px;font-weight:500}
+.story-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.story-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;cursor:pointer;transition:all .4s cubic-bezier(.25,.8,.25,1);position:relative}
+.story-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.18);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.story-card-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .4s}
+.story-card:hover .story-card-img{transform:scale(1.03)}
+.story-card-body{padding:20px}
+.story-card-chapter{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:.5;margin-bottom:4px}
+.story-card-title{font-size:22px;font-weight:600;margin-bottom:6px}
+.story-card-concept{font-size:13px;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:8px;font-weight:500}
+.story-card-desc{font-size:14px;color:var(--text-dim);line-height:1.6}
+.story-card-arrow{position:absolute;bottom:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:16px}
+.story-card:hover .story-card-arrow{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
 
-/* ===== STORY SECTION ===== */
-.story-container{max-width:1100px;margin:0 auto;padding:0 24px 80px}
-.story-page{display:none;animation:fadeUp .5s ease}
-.story-page.active{display:block}
+/* ===== STORY PAGE VIEW ===== */
+.story-view{display:none;max-width:900px;margin:0 auto;padding:0 20px 60px}
+.story-view.active{display:block;animation:fadeUp .5s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
-/* Story Header */
-.story-header{text-align:center;margin-bottom:40px}
-.story-chapter{font-size:13px;text-transform:uppercase;letter-spacing:3px;color:var(--text-dim);margin-bottom:8px}
-.story-title{font-size:clamp(28px,5vw,48px);font-weight:700;margin-bottom:8px}
-.story-concept{font-size:18px;font-weight:500;padding:6px 18px;border-radius:999px;display:inline-block;margin-bottom:16px}
-.story-intro{font-size:17px;color:var(--text-dim);max-width:650px;margin:0 auto;line-height:1.7}
-.character-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;font-size:14px;margin-bottom:16px;font-weight:500}
+/* Back button */
+.back-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--text);font-family:inherit;font-size:14px;cursor:pointer;transition:all .3s;margin-bottom:24px;font-weight:500;backdrop-filter:blur(8px)}
+.back-btn:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08)}
 
-/* Story Grid */
-.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
-@media(max-width:768px){.story-grid{grid-template-columns:1fr}}
+/* Story header */
+.story-header{text-align:center;margin-bottom:32px}
+.story-chapter{font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--text-dim);margin-bottom:6px}
+.story-title{font-size:clamp(28px,5vw,44px);font-weight:700;margin-bottom:12px}
+.story-concept{font-size:15px;font-weight:500;padding:6px 18px;border-radius:999px;display:inline-block;margin-bottom:16px}
+.character-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;font-size:14px;margin-bottom:12px;font-weight:500}
 
-/* 3D Scene Card */
-.scene-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:24px;min-height:350px;position:relative;overflow:hidden}
-.scene-card canvas{border-radius:12px}
-.scene-label{position:absolute;bottom:16px;left:16px;font-size:12px;color:var(--text-dim);background:rgba(10,10,46,.8);padding:4px 12px;border-radius:8px;backdrop-filter:blur(8px)}
+/* Infographic Image - Hero of each story */
+.story-infographic{width:100%;border-radius:16px;margin-bottom:32px;border:2px solid rgba(255,255,255,.08);box-shadow:0 8px 40px rgba(0,0,0,.4);cursor:pointer;transition:all .3s}
+.story-infographic:hover{border-color:rgba(255,255,255,.15);box-shadow:0 12px 50px rgba(0,0,0,.5)}
 
-/* Narration Card */
-.narration-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:20px}
-.narration-text{font-size:17px;line-height:1.8;color:var(--text);flex:1}
-.narration-text .highlight{color:var(--gold);font-weight:600}
-.narration-text .code-inline{font-family:'Fira Code',monospace;background:rgba(139,92,246,.15);color:var(--purple);padding:2px 8px;border-radius:6px;font-size:14px}
+/* Story narration */
+.story-narration{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;margin-bottom:24px;font-size:17px;line-height:1.8}
+.story-narration .highlight{color:var(--gold);font-weight:600}
+.story-narration .code-inline{font-family:'Fira Code',monospace;background:rgba(139,92,246,.15);color:var(--purple);padding:2px 8px;border-radius:6px;font-size:14px}
 
 /* Code Scroll */
 .code-scroll{background:linear-gradient(135deg,rgba(20,20,60,.9),rgba(30,20,50,.9));border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:24px;position:relative;overflow:hidden;margin-bottom:24px}
@@ -99,8 +98,8 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 .code-scroll .bi{color:var(--orange)}
 
 /* Interactive Section */
-.interactive-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;margin-bottom:24px}
-.interactive-section h3{font-size:20px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.interactive-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;margin-bottom:24px}
+.interactive-section h3{font-size:20px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .interactive-section h3 .emoji{font-size:24px}
 
 /* Buttons */
@@ -114,7 +113,7 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 .btn-sm{padding:8px 16px;font-size:13px;border-radius:8px}
 
 /* Fun Fact */
-.fun-fact{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(251,191,36,.03));border:1px solid rgba(251,191,36,.2);border-radius:16px;padding:20px;display:flex;gap:12px;align-items:flex-start}
+.fun-fact{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(251,191,36,.03));border:1px solid rgba(251,191,36,.2);border-radius:16px;padding:20px;display:flex;gap:12px;align-items:flex-start;margin-bottom:24px}
 .fun-fact .ff-icon{font-size:24px;flex-shrink:0}
 .fun-fact .ff-title{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:4px;font-weight:600}
 .fun-fact .ff-text{font-size:14px;color:var(--text-dim);line-height:1.6}
@@ -123,31 +122,22 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 
 /* Story 1: Magic Backpack */
 .backpack-zone{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:20px 0}
-.pouch{width:140px;height:100px;background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(139,92,246,.05));border:2px solid rgba(139,92,246,.3);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative}
+.pouch{width:130px;height:95px;background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(139,92,246,.05));border:2px solid rgba(139,92,246,.3);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative}
 .pouch:hover{transform:scale(1.05);border-color:var(--purple);box-shadow:0 8px 30px rgba(139,92,246,.2)}
 .pouch.open{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border-color:var(--green)}
 .pouch .pouch-label{font-size:12px;color:var(--text-dim);font-family:'Fira Code',monospace;margin-bottom:4px}
-.pouch .pouch-icon{font-size:32px;transition:transform .3s}
+.pouch .pouch-icon{font-size:28px;transition:transform .3s}
 .pouch.open .pouch-icon{transform:scale(1.2)}
 .pouch .pouch-value{font-size:13px;color:var(--green);font-family:'Fira Code',monospace;margin-top:4px;opacity:0;transition:opacity .3s}
 .pouch.open .pouch-value{opacity:1}
 .var-output{text-align:center;margin-top:16px;font-family:'Fira Code',monospace;font-size:15px;color:var(--gold);min-height:24px;transition:all .3s}
-
-/* Items to drag */
-.items-shelf{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:16px 0}
-.drag-item{padding:10px 18px;background:rgba(251,191,36,.1);border:2px dashed rgba(251,191,36,.3);border-radius:12px;cursor:grab;font-size:14px;transition:all .3s;user-select:none}
-.drag-item:hover{background:rgba(251,191,36,.2);transform:translateY(-2px)}
-.drag-item.placed{opacity:.4;pointer-events:none}
-.drop-zone{width:100%;min-height:80px;border:2px dashed rgba(139,92,246,.2);border-radius:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:16px;margin:12px 0;transition:all .3s;color:var(--text-dim);font-size:14px}
-.drop-zone.over{border-color:var(--green);background:rgba(16,185,129,.05)}
-.drop-zone .placed-item{padding:6px 14px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:8px;color:var(--green);font-size:13px;font-family:'Fira Code',monospace}
 
 /* Story 2: Dragon's Riddle */
 .dragon-scene{text-align:center;margin:20px 0}
 .dragon-speech{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:16px;padding:20px;margin:16px auto;max-width:500px;font-size:16px;line-height:1.6;position:relative}
 .dragon-speech::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:10px solid rgba(239,68,68,.2)}
 .choice-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:16px 0}
-.choice-btn{padding:12px 24px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-family:inherit;font-size:15px;cursor:pointer;transition:all .3s;min-width:160px}
+.choice-btn{padding:12px 24px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-family:inherit;font-size:15px;cursor:pointer;transition:all .3s;min-width:140px}
 .choice-btn:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08);transform:translateY(-2px)}
 .choice-btn.correct{border-color:var(--green);background:rgba(16,185,129,.15);color:var(--green)}
 .choice-btn.wrong{border-color:var(--red);background:rgba(239,68,68,.1);color:var(--red);animation:shake .4s}
@@ -158,14 +148,14 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 
 /* Story 3: Wizard's Spells */
 .stars-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:20px 0}
-.spell-star{width:60px;height:60px;display:flex;align-items:center;justify-content:center;font-size:32px;border-radius:50%;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);transition:all .5s;opacity:.3}
+.spell-star{width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:28px;border-radius:50%;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);transition:all .5s;opacity:.3}
 .spell-star.lit{opacity:1;background:rgba(251,191,36,.15);border-color:var(--gold);box-shadow:0 0 20px rgba(251,191,36,.3);transform:scale(1.1)}
 .spell-controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0}
 .spell-log{font-family:'Fira Code',monospace;font-size:13px;color:var(--text-dim);max-height:120px;overflow-y:auto;padding:12px;background:rgba(0,0,0,.2);border-radius:12px;margin-top:12px;line-height:1.8}
 .spell-log .log-line{animation:fadeUp .3s}
 .spell-log .log-iter{color:var(--cyan)}
 .spell-log .log-action{color:var(--gold)}
-.loop-counter{text-align:center;font-size:24px;font-weight:700;color:var(--purple);margin:12px 0}
+.loop-counter{text-align:center;font-size:20px;font-weight:700;color:var(--purple);margin:12px 0}
 
 /* Story 4: Recipe Book */
 .kitchen-area{text-align:center;margin:20px 0}
@@ -173,18 +163,18 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 .ingredient{padding:10px 20px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);font-size:15px;cursor:pointer;transition:all .3s}
 .ingredient:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.06);transform:translateY(-2px)}
 .ingredient.selected{border-color:var(--green);background:rgba(16,185,129,.1);color:var(--green)}
-.cauldron{width:120px;height:120px;margin:20px auto;background:radial-gradient(circle,rgba(139,92,246,.2),rgba(139,92,246,.05));border:3px solid rgba(139,92,246,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;transition:all .5s;position:relative}
+.cauldron{width:100px;height:100px;margin:16px auto;background:radial-gradient(circle,rgba(139,92,246,.2),rgba(139,92,246,.05));border:3px solid rgba(139,92,246,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;transition:all .5s;position:relative}
 .cauldron.brewing{animation:brew 1s ease;border-color:var(--gold);box-shadow:0 0 40px rgba(251,191,36,.2)}
 @keyframes brew{0%{transform:scale(1) rotate(0)}25%{transform:scale(1.1) rotate(-5deg)}50%{transform:scale(1.15) rotate(5deg)}75%{transform:scale(1.1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
-.recipe-result{font-size:18px;font-weight:600;color:var(--gold);margin:16px 0;min-height:28px}
+.recipe-result{font-size:18px;font-weight:600;color:var(--gold);margin:16px 0;min-height:28px;text-align:center}
 .recipe-code-live{font-family:'Fira Code',monospace;font-size:14px;padding:16px;background:rgba(0,0,0,.2);border-radius:12px;text-align:left;margin:16px 0;color:var(--text-dim);line-height:1.8}
 .recipe-code-live .active-line{color:var(--gold)}
 
 /* Story 5: Toy Box */
 .toybox{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:20px 0;min-height:80px;padding:16px;border:2px solid rgba(139,92,246,.2);border-radius:16px;background:rgba(139,92,246,.03);align-items:center}
-.toy-slot{width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;transition:all .3s;cursor:pointer;gap:4px}
+.toy-slot{width:75px;height:75px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.08);border-radius:12px;transition:all .3s;cursor:pointer;gap:4px}
 .toy-slot:hover{border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
-.toy-slot .toy-emoji{font-size:28px}
+.toy-slot .toy-emoji{font-size:26px}
 .toy-slot .toy-index{font-size:10px;font-family:'Fira Code',monospace;color:var(--text-dim)}
 .toy-controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0;align-items:center}
 .toy-input{padding:10px 16px;border-radius:10px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-family:inherit;font-size:14px;width:140px;outline:none;transition:border-color .3s}
@@ -193,14 +183,20 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 .toy-list-display{font-family:'Fira Code',monospace;font-size:15px;text-align:center;margin:12px 0;padding:12px;background:rgba(0,0,0,.2);border-radius:12px;color:var(--green)}
 
 /* ===== NAV ARROWS ===== */
-.story-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;margin-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+.story-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;margin-top:12px;border-top:1px solid rgba(255,255,255,.06)}
 .nav-arrow{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-family:inherit;font-size:14px;cursor:pointer;transition:all .3s;font-weight:500}
 .nav-arrow:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.06);transform:translateY(-2px)}
 .nav-arrow.disabled{opacity:.3;pointer-events:none}
 .nav-progress{display:flex;gap:6px}
-.nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.1);transition:all .3s}
+.nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.1);transition:all .3s;cursor:pointer}
 .nav-dot.active{background:var(--purple);box-shadow:0 0 10px rgba(139,92,246,.4)}
 .nav-dot.done{background:var(--green)}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;backdrop-filter:blur(12px)}
+.lightbox.active{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:12px;box-shadow:0 0 60px rgba(0,0,0,.6)}
+.lightbox-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.5);color:white;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
 
 /* ===== FOOTER ===== */
 .site-footer{text-align:center;padding:40px 24px 60px;border-top:1px solid rgba(255,255,255,.06);color:var(--text-dim);font-size:14px}
@@ -209,13 +205,17 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:600px){
-  .chapter-btn{padding:10px 14px;font-size:13px}
-  .chapter-btn .ch-num{display:none}
-  .pouch{width:110px;height:85px}
-  .spell-star{width:48px;height:48px;font-size:24px}
-  .toy-slot{width:65px;height:65px}
-  .toy-slot .toy-emoji{font-size:22px}
+  .hero{padding:60px 16px 30px}
+  .story-cards{grid-template-columns:1fr}
+  .story-card-body{padding:16px}
+  .pouch{width:100px;height:80px}
+  .spell-star{width:44px;height:44px;font-size:20px}
+  .toy-slot{width:60px;height:60px}
+  .toy-slot .toy-emoji{font-size:20px}
   .code-scroll pre{font-size:12px}
+  .choice-btn{min-width:120px;padding:10px 16px;font-size:14px}
+  .story-narration{padding:18px;font-size:15px}
+  .back-btn{padding:8px 14px;font-size:13px}
 }
 
 /* ===== SPARKLE CURSOR ===== */
@@ -235,73 +235,106 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 <!-- Three.js Background -->
 <canvas id="three-canvas"></canvas>
 
+<!-- Lightbox for full-screen image view -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Infographic">
+</div>
+
 <div id="app">
 
-  <!-- Hero -->
-  <header class="hero">
-    <span class="hero-emoji">🐍✨📖</span>
-    <div class="hero-badge">🪄 5 Magical Stories • 5 Python Concepts</div>
-    <h1>Python<br><span class="magic">Adventures</span></h1>
-    <p class="hero-sub">Learn Python through magical stories! Meet Luna, a friendly dragon, wizard Kai, chef Maya, and Zara — each teaches you a Python superpower!</p>
-    <a href="#chapters" class="scroll-hint">
-      Choose a Story
-      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    </a>
-  </header>
+  <!-- ===================== HOMEPAGE ===================== -->
+  <div id="homepage">
+    <header class="hero">
+      <div class="hero-badge">🪄 5 Magical Stories • 5 Python Concepts</div>
+      <h1>Python<br><span class="magic">Adventures</span></h1>
+      <p class="hero-sub">Learn Python through magical stories! Meet Luna, a friendly dragon, wizard Kai, chef Maya, and Zara — each teaches you a Python superpower!</p>
+    </header>
 
-  <!-- Chapter Navigation -->
-  <nav class="chapter-nav" id="chapters">
-    <button class="chapter-btn active" onclick="goToStory(0)" style="--active-color:#8b5cf6">
-      <span class="ch-emoji">🎒</span>
-      <div><span class="ch-num">Chapter 1</span>Variables</div>
-    </button>
-    <button class="chapter-btn" onclick="goToStory(1)" style="--active-color:#ef4444">
-      <span class="ch-emoji">🐉</span>
-      <div><span class="ch-num">Chapter 2</span>If / Else</div>
-    </button>
-    <button class="chapter-btn" onclick="goToStory(2)" style="--active-color:#06b6d4">
-      <span class="ch-emoji">🧙</span>
-      <div><span class="ch-num">Chapter 3</span>Loops</div>
-    </button>
-    <button class="chapter-btn" onclick="goToStory(3)" style="--active-color:#10b981">
-      <span class="ch-emoji">👩‍🍳</span>
-      <div><span class="ch-num">Chapter 4</span>Functions</div>
-    </button>
-    <button class="chapter-btn" onclick="goToStory(4)" style="--active-color:#ec4899">
-      <span class="ch-emoji">🧸</span>
-      <div><span class="ch-num">Chapter 5</span>Lists</div>
-    </button>
-  </nav>
+    <div class="home-section">
+      <h2>✨ Choose Your Story ✨</h2>
+      <div class="story-cards">
 
-  <!-- Story Container -->
-  <div class="story-container">
-
-    <!-- ==================== STORY 1: THE MAGIC BACKPACK ==================== -->
-    <div class="story-page active" id="story-0">
-      <div class="story-header">
-        <div class="story-chapter">Chapter 1</div>
-        <h2 class="story-title" style="color:var(--purple)">The Magic Backpack ✨</h2>
-        <div class="character-badge" style="background:rgba(139,92,246,.1);color:var(--purple)">👧 Meet Luna, the Young Explorer</div>
-        <div class="story-concept" style="background:rgba(139,92,246,.1);color:var(--purple)">Python Concept: Variables</div>
-        <p class="story-intro">Luna has a magical backpack with special pouches. Each pouch has a <em>label</em> on it and holds something inside — just like <strong>variables</strong> in Python store data!</p>
-      </div>
-
-      <div class="story-grid">
-        <div class="scene-card" id="scene-1">
-          <div class="scene-label">🎒 Luna's Magic Backpack — Click to explore!</div>
-        </div>
-        <div class="narration-card">
-          <div class="narration-text">
-            <p>Luna found a <span class="highlight">magic backpack</span> in the forest! 🌲</p>
-            <p style="margin-top:12px">It has special pouches with <strong>labels</strong>. When Luna writes a label and puts something inside, the backpack remembers it forever!</p>
-            <p style="margin-top:12px">In Python, we call these <span class="highlight">variables</span>. A variable has a <strong>name</strong> (the label) and a <strong>value</strong> (what's inside).</p>
-            <p style="margin-top:12px">Click the pouches below to see what Luna stored! 👇</p>
+        <div class="story-card" onclick="openStory(0)">
+          <img class="story-card-img" src="images/variables-magic-backpack.jpg" alt="The Magic Backpack - Variables" loading="lazy">
+          <div class="story-card-body">
+            <div class="story-card-chapter">Chapter 1</div>
+            <div class="story-card-title" style="color:var(--purple)">The Magic Backpack ✨</div>
+            <div class="story-card-concept" style="background:rgba(139,92,246,.1);color:var(--purple)">Variables</div>
+            <div class="story-card-desc">Luna's magical backpack has special pouches — each one holds a secret value, just like Python variables!</div>
           </div>
+          <div class="story-card-arrow">→</div>
         </div>
-      </div>
 
-      <div class="code-scroll">
-        <pre><span class="cm"># Luna labels her pouches (creates variables!)</span>
+        <div class="story-card" onclick="openStory(1)">
+          <img class="story-card-img" src="images/ifelse-dragons-riddle.jpg" alt="The Dragon's Riddle - If/Else" loading="lazy">
+          <div class="story-card-body">
+            <div class="story-card-chapter">Chapter 2</div>
+            <div class="story-card-title" style="color:var(--red)">The Dragon's Riddle 🔥</div>
+            <div class="story-card-concept" style="background:rgba(239,68,68,.1);color:var(--red)">If / Else</div>
+            <div class="story-card-desc">A friendly dragon guards a magical cave. Answer riddles using if, elif, and else to unlock the door!</div>
+          </div>
+          <div class="story-card-arrow">→</div>
+        </div>
+
+        <div class="story-card" onclick="openStory(2)">
+          <img class="story-card-img" src="images/loops-wizards-spell.jpg" alt="The Wizard's Spell - Loops" loading="lazy">
+          <div class="story-card-body">
+            <div class="story-card-chapter">Chapter 3</div>
+            <div class="story-card-title" style="color:var(--cyan)">The Wizard's Spell 🌟</div>
+            <div class="story-card-concept" style="background:rgba(6,182,212,.1);color:var(--cyan)">Loops</div>
+            <div class="story-card-desc">Wizard Kai learns spells that repeat! Light stars with for loops and battle dragons with while loops!</div>
+          </div>
+          <div class="story-card-arrow">→</div>
+        </div>
+
+        <div class="story-card" onclick="openStory(3)">
+          <img class="story-card-img" src="images/functions-recipe-book.jpg" alt="The Recipe Book - Functions" loading="lazy">
+          <div class="story-card-body">
+            <div class="story-card-chapter">Chapter 4</div>
+            <div class="story-card-title" style="color:var(--green)">The Recipe Book 🧪</div>
+            <div class="story-card-concept" style="background:rgba(16,185,129,.1);color:var(--green)">Functions</div>
+            <div class="story-card-desc">Chef Maya's recipe book holds magical functions — give ingredients, get a potion! Reusable magic!</div>
+          </div>
+          <div class="story-card-arrow">→</div>
+        </div>
+
+        <div class="story-card" onclick="openStory(4)">
+          <img class="story-card-img" src="images/lists-toy-box.jpg" alt="The Magical Toy Box - Lists" loading="lazy">
+          <div class="story-card-body">
+            <div class="story-card-chapter">Chapter 5</div>
+            <div class="story-card-title" style="color:var(--pink)">The Magical Toy Box 🎁</div>
+            <div class="story-card-concept" style="background:rgba(236,72,153,.1);color:var(--pink)">Lists</div>
+            <div class="story-card-desc">Zara's enchanted toy box has numbered slots — add, remove, and find toys just like Python lists!</div>
+          </div>
+          <div class="story-card-arrow">→</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== STORY PAGES ===================== -->
+
+  <!-- STORY 1: THE MAGIC BACKPACK -->
+  <div class="story-view" id="story-0">
+    <button class="back-btn" onclick="goHome()">← Back to Stories</button>
+    <div class="story-header">
+      <div class="story-chapter">Chapter 1</div>
+      <h2 class="story-title" style="color:var(--purple)">The Magic Backpack ✨</h2>
+      <div class="character-badge" style="background:rgba(139,92,246,.1);color:var(--purple)">👧 Meet Luna, the Young Explorer</div>
+      <div class="story-concept" style="background:rgba(139,92,246,.1);color:var(--purple)">Python Concept: Variables</div>
+    </div>
+
+    <img class="story-infographic" src="images/variables-magic-backpack.jpg" alt="Variables - The Magic Backpack Infographic" onclick="openLightbox(this.src)">
+
+    <div class="story-narration">
+      <p>Luna found a <span class="highlight">magic backpack</span> in the forest! 🌲 It has special pouches with <strong>labels</strong>. When Luna writes a label and puts something inside, the backpack remembers it forever!</p>
+      <p style="margin-top:12px">In Python, we call these <span class="highlight">variables</span>. A variable has a <strong>name</strong> (the label) and a <strong>value</strong> (what's inside).</p>
+    </div>
+
+    <div class="code-scroll">
+      <pre><span class="cm"># Luna labels her pouches (creates variables!)</span>
 <span class="fn">name</span> <span class="op">=</span> <span class="str">"Luna"</span>        <span class="cm"># A string (text)</span>
 <span class="fn">age</span> <span class="op">=</span> <span class="num">10</span>             <span class="cm"># An integer (number)</span>
 <span class="fn">snack</span> <span class="op">=</span> <span class="str">"cookies"</span>   <span class="cm"># Another string</span>
@@ -311,90 +344,82 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 <span class="cm"># Python remembers what's in each pouch!</span>
 <span class="bi">print</span>(<span class="fn">name</span>)     <span class="cm"># Output: Luna</span>
 <span class="bi">print</span>(<span class="fn">age</span>)      <span class="cm"># Output: 10</span></pre>
-      </div>
+    </div>
 
-      <div class="interactive-section">
-        <h3><span class="emoji">🎒</span> Click Luna's Pouches!</h3>
-        <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Each pouch is a variable — click to reveal what's stored inside!</p>
-        <div class="backpack-zone" id="backpack">
-          <div class="pouch" onclick="openPouch(this,'name','&quot;Luna&quot;','👧')">
-            <div class="pouch-label">name</div>
-            <div class="pouch-icon">❓</div>
-            <div class="pouch-value">"Luna"</div>
-          </div>
-          <div class="pouch" onclick="openPouch(this,'age','10','🔢')">
-            <div class="pouch-label">age</div>
-            <div class="pouch-icon">❓</div>
-            <div class="pouch-value">10</div>
-          </div>
-          <div class="pouch" onclick="openPouch(this,'snack','&quot;cookies&quot;','🍪')">
-            <div class="pouch-label">snack</div>
-            <div class="pouch-icon">❓</div>
-            <div class="pouch-value">"cookies"</div>
-          </div>
-          <div class="pouch" onclick="openPouch(this,'has_map','True','🗺️')">
-            <div class="pouch-label">has_map</div>
-            <div class="pouch-icon">❓</div>
-            <div class="pouch-value">True</div>
-          </div>
-          <div class="pouch" onclick="openPouch(this,'coins','3.5','💰')">
-            <div class="pouch-label">coins</div>
-            <div class="pouch-icon">❓</div>
-            <div class="pouch-value">3.5</div>
-          </div>
+    <div class="interactive-section">
+      <h3><span class="emoji">🎒</span> Click Luna's Pouches!</h3>
+      <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Each pouch is a variable — click to reveal what's stored inside!</p>
+      <div class="backpack-zone" id="backpack">
+        <div class="pouch" onclick="openPouch(this,'name','&quot;Luna&quot;','👧')">
+          <div class="pouch-label">name</div>
+          <div class="pouch-icon">❓</div>
+          <div class="pouch-value">"Luna"</div>
         </div>
-        <div class="var-output" id="var-output"></div>
+        <div class="pouch" onclick="openPouch(this,'age','10','🔢')">
+          <div class="pouch-label">age</div>
+          <div class="pouch-icon">❓</div>
+          <div class="pouch-value">10</div>
+        </div>
+        <div class="pouch" onclick="openPouch(this,'snack','&quot;cookies&quot;','🍪')">
+          <div class="pouch-label">snack</div>
+          <div class="pouch-icon">❓</div>
+          <div class="pouch-value">"cookies"</div>
+        </div>
+        <div class="pouch" onclick="openPouch(this,'has_map','True','🗺️')">
+          <div class="pouch-label">has_map</div>
+          <div class="pouch-icon">❓</div>
+          <div class="pouch-value">True</div>
+        </div>
+        <div class="pouch" onclick="openPouch(this,'coins','3.5','💰')">
+          <div class="pouch-label">coins</div>
+          <div class="pouch-icon">❓</div>
+          <div class="pouch-value">3.5</div>
+        </div>
       </div>
+      <div class="var-output" id="var-output"></div>
+    </div>
 
-      <div class="interactive-section">
-        <h3><span class="emoji">🧳</span> Pack Luna's Backpack!</h3>
-        <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Click items to store them as variables in Luna's backpack:</p>
-        <div class="items-shelf" id="items-shelf">
-          <div class="drag-item" onclick="packItem(this,'🧭 compass')">🧭 compass</div>
-          <div class="drag-item" onclick="packItem(this,'📔 journal')">📔 journal</div>
-          <div class="drag-item" onclick="packItem(this,'🔑 key')">🔑 key</div>
-          <div class="drag-item" onclick="packItem(this,'🍎 apple')">🍎 apple</div>
-          <div class="drag-item" onclick="packItem(this,'⭐ star')">⭐ star</div>
-        </div>
-        <div class="drop-zone" id="drop-zone">Drop zone — click items above to pack!</div>
-        <div class="var-output" id="pack-output"></div>
-      </div>
-
-      <div class="fun-fact">
-        <div class="ff-icon">💡</div>
-        <div>
-          <div class="ff-title">Fun Fact!</div>
-          <div class="ff-text">Variable names in Python can't start with a number! <code>1name</code> won't work, but <code>name1</code> will. Also, Python is <strong>case-sensitive</strong> — <code>Name</code> and <code>name</code> are different variables!</div>
-        </div>
+    <div class="fun-fact">
+      <div class="ff-icon">💡</div>
+      <div>
+        <div class="ff-title">Fun Fact!</div>
+        <div class="ff-text">Variable names in Python can't start with a number! <code>1name</code> won't work, but <code>name1</code> will. Also, Python is <strong>case-sensitive</strong> — <code>Name</code> and <code>name</code> are different variables!</div>
       </div>
     </div>
 
-    <!-- ==================== STORY 2: THE DRAGON'S RIDDLE ==================== -->
-    <div class="story-page" id="story-1">
-      <div class="story-header">
-        <div class="story-chapter">Chapter 2</div>
-        <h2 class="story-title" style="color:var(--red)">The Dragon's Riddle 🔥</h2>
-        <div class="character-badge" style="background:rgba(239,68,68,.1);color:var(--red)">🐉 Meet the Friendly Dragon</div>
-        <div class="story-concept" style="background:rgba(239,68,68,.1);color:var(--red)">Python Concept: If / Else</div>
-        <p class="story-intro">A friendly dragon guards a magical cave. To enter, you must answer riddles correctly! The dragon checks your answers using <strong>if</strong>, <strong>elif</strong>, and <strong>else</strong> — just like Python!</p>
+    <div class="story-nav">
+      <button class="nav-arrow disabled">← Previous</button>
+      <div class="nav-progress">
+        <div class="nav-dot active" onclick="openStory(0)"></div>
+        <div class="nav-dot" onclick="openStory(1)"></div>
+        <div class="nav-dot" onclick="openStory(2)"></div>
+        <div class="nav-dot" onclick="openStory(3)"></div>
+        <div class="nav-dot" onclick="openStory(4)"></div>
       </div>
+      <button class="nav-arrow" onclick="openStory(1)">Next Story →</button>
+    </div>
+  </div>
 
-      <div class="story-grid">
-        <div class="scene-card" id="scene-2">
-          <div class="scene-label">🐉 The Dragon's Cave — Answer wisely!</div>
-        </div>
-        <div class="narration-card">
-          <div class="narration-text">
-            <p>Deep in the mountains, Luna found a <span class="highlight">glowing cave</span> guarded by a big, friendly dragon! 🏔️</p>
-            <p style="margin-top:12px">The dragon smiled and said: <em>"To enter my cave, you must answer my riddle! I'll check your answer…"</em></p>
-            <p style="margin-top:12px">In Python, we use <span class="code-inline">if</span>, <span class="code-inline">elif</span>, and <span class="code-inline">else</span> to check conditions — just like the dragon checks answers!</p>
-            <p style="margin-top:12px">Try answering the dragon's riddles below! 🐉</p>
-          </div>
-        </div>
-      </div>
+  <!-- STORY 2: THE DRAGON'S RIDDLE -->
+  <div class="story-view" id="story-1">
+    <button class="back-btn" onclick="goHome()">← Back to Stories</button>
+    <div class="story-header">
+      <div class="story-chapter">Chapter 2</div>
+      <h2 class="story-title" style="color:var(--red)">The Dragon's Riddle 🔥</h2>
+      <div class="character-badge" style="background:rgba(239,68,68,.1);color:var(--red)">🐉 Meet the Friendly Dragon</div>
+      <div class="story-concept" style="background:rgba(239,68,68,.1);color:var(--red)">Python Concept: If / Else</div>
+    </div>
 
-      <div class="code-scroll">
-        <pre><span class="cm"># The dragon checks your answer!</span>
+    <img class="story-infographic" src="images/ifelse-dragons-riddle.jpg" alt="If/Else - The Dragon's Riddle Infographic" onclick="openLightbox(this.src)">
+
+    <div class="story-narration">
+      <p>Deep in the mountains, Luna found a <span class="highlight">glowing cave</span> guarded by a big, friendly dragon! 🏔️</p>
+      <p style="margin-top:12px">The dragon said: <em>"To enter my cave, you must answer my riddle!"</em></p>
+      <p style="margin-top:12px">In Python, we use <span class="code-inline">if</span>, <span class="code-inline">elif</span>, and <span class="code-inline">else</span> to check conditions — just like the dragon checks answers!</p>
+    </div>
+
+    <div class="code-scroll">
+      <pre><span class="cm"># The dragon checks your answer!</span>
 <span class="fn">password</span> <span class="op">=</span> <span class="bi">input</span>(<span class="str">"What's the magic word? "</span>)
 
 <span class="kw">if</span> <span class="fn">password</span> <span class="op">==</span> <span class="str">"friendship"</span>:
@@ -402,82 +427,65 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 <span class="kw">elif</span> <span class="fn">password</span> <span class="op">==</span> <span class="str">"friend"</span>:
     <span class="bi">print</span>(<span class="str">"🤔 So close! Almost the right word..."</span>)
 <span class="kw">else</span>:
-    <span class="bi">print</span>(<span class="str">"❌ That's not it. Try again!"</span>)
+    <span class="bi">print</span>(<span class="str">"❌ That's not it. Try again!"</span>)</pre>
+    </div>
 
-<span class="cm"># The dragon also knows numbers!</span>
-<span class="fn">gems</span> <span class="op">=</span> <span class="num">5</span>
-<span class="kw">if</span> <span class="fn">gems</span> <span class="op">>=</span> <span class="num">3</span>:
-    <span class="bi">print</span>(<span class="str">"You're rich! 💎"</span>)
-<span class="kw">else</span>:
-    <span class="bi">print</span>(<span class="str">"Keep searching!"</span>)</pre>
-      </div>
-
-      <div class="interactive-section">
-        <h3><span class="emoji">🐉</span> The Dragon's Riddle</h3>
-        <div class="dragon-scene">
-          <div class="dragon-speech" id="dragon-speech">
-            🐉 "What is the magic word to enter my cave? Choose wisely, young adventurer!"
-          </div>
-          <div class="choice-buttons" id="riddle-choices">
-            <button class="choice-btn" onclick="answerRiddle(this,'fire')">🔥 "fire"</button>
-            <button class="choice-btn" onclick="answerRiddle(this,'friend')">🤝 "friend"</button>
-            <button class="choice-btn" onclick="answerRiddle(this,'friendship')">💛 "friendship"</button>
-            <button class="choice-btn" onclick="answerRiddle(this,'magic')">✨ "magic"</button>
-          </div>
-          <div class="riddle-result" id="riddle-result"></div>
+    <div class="interactive-section">
+      <h3><span class="emoji">🐉</span> The Dragon's Riddle</h3>
+      <div class="dragon-scene">
+        <div class="dragon-speech" id="dragon-speech">
+          🐉 "What is the magic word to enter my cave? Choose wisely, young adventurer!"
         </div>
-      </div>
-
-      <div class="interactive-section">
-        <h3><span class="emoji">🎯</span> Riddle Round 2: Number Check!</h3>
-        <div class="dragon-scene">
-          <div class="dragon-speech" id="dragon-speech-2">
-            🐉 "How many stars are in the sky tonight? I'll check if it's greater than, less than, or equal to 7!"
-          </div>
-          <div class="choice-buttons" id="riddle-choices-2">
-            <button class="choice-btn" onclick="answerRiddle2(this,3)">3 stars</button>
-            <button class="choice-btn" onclick="answerRiddle2(this,7)">7 stars</button>
-            <button class="choice-btn" onclick="answerRiddle2(this,10)">10 stars</button>
-          </div>
-          <div class="riddle-result" id="riddle-result-2"></div>
+        <div class="choice-buttons" id="riddle-choices">
+          <button class="choice-btn" onclick="answerRiddle(this,'fire')">🔥 "fire"</button>
+          <button class="choice-btn" onclick="answerRiddle(this,'friend')">🤝 "friend"</button>
+          <button class="choice-btn" onclick="answerRiddle(this,'friendship')">💛 "friendship"</button>
+          <button class="choice-btn" onclick="answerRiddle(this,'magic')">✨ "magic"</button>
         </div>
-      </div>
-
-      <div class="fun-fact">
-        <div class="ff-icon">💡</div>
-        <div>
-          <div class="ff-title">Fun Fact!</div>
-          <div class="ff-text">In Python, <code>==</code> means "is equal to?" (a question), while <code>=</code> means "set this to" (a command). The dragon <em>asks</em> with <code>==</code> but Luna <em>stores</em> with <code>=</code>!</div>
-        </div>
+        <div class="riddle-result" id="riddle-result"></div>
       </div>
     </div>
 
-    <!-- ==================== STORY 3: THE WIZARD'S SPELL ==================== -->
-    <div class="story-page" id="story-2">
-      <div class="story-header">
-        <div class="story-chapter">Chapter 3</div>
-        <h2 class="story-title" style="color:var(--cyan)">The Wizard's Spell 🌟</h2>
-        <div class="character-badge" style="background:rgba(6,182,212,.1);color:var(--cyan)">🧙 Meet Kai, the Young Wizard</div>
-        <div class="story-concept" style="background:rgba(6,182,212,.1);color:var(--cyan)">Python Concept: Loops</div>
-        <p class="story-intro">Wizard Kai learns spells that <em>repeat</em> actions! Lighting stars one by one, battling dragons in a row — loops are the wizard's most powerful tool!</p>
+    <div class="fun-fact">
+      <div class="ff-icon">💡</div>
+      <div>
+        <div class="ff-title">Fun Fact!</div>
+        <div class="ff-text">In Python, <code>==</code> means "is equal to?" (a question), while <code>=</code> means "set this to" (a command). The dragon <em>asks</em> with <code>==</code> but Luna <em>stores</em> with <code>=</code>!</div>
       </div>
+    </div>
 
-      <div class="story-grid">
-        <div class="scene-card" id="scene-3">
-          <div class="scene-label">🌟 Kai's Star Spell — Cast the spell!</div>
-        </div>
-        <div class="narration-card">
-          <div class="narration-text">
-            <p>Young wizard <span class="highlight">Kai</span> stood under the night sky. His teacher said: <em>"To light the stars, you must cast a repeating spell!"</em> 🌙</p>
-            <p style="margin-top:12px">A <span class="code-inline">for</span> loop repeats something a set number of times. A <span class="code-inline">while</span> loop repeats as long as a condition is true!</p>
-            <p style="margin-top:12px">Kai raised his wand: <em>"For each star in the sky… GLOW!"</em> ✨</p>
-            <p style="margin-top:12px">Click the spell button below to watch Kai light the stars one by one!</p>
-          </div>
-        </div>
+    <div class="story-nav">
+      <button class="nav-arrow" onclick="openStory(0)">← Previous</button>
+      <div class="nav-progress">
+        <div class="nav-dot" onclick="openStory(0)"></div>
+        <div class="nav-dot active" onclick="openStory(1)"></div>
+        <div class="nav-dot" onclick="openStory(2)"></div>
+        <div class="nav-dot" onclick="openStory(3)"></div>
+        <div class="nav-dot" onclick="openStory(4)"></div>
       </div>
+      <button class="nav-arrow" onclick="openStory(2)">Next Story →</button>
+    </div>
+  </div>
 
-      <div class="code-scroll">
-        <pre><span class="cm"># Kai's star-lighting spell (for loop)</span>
+  <!-- STORY 3: THE WIZARD'S SPELL -->
+  <div class="story-view" id="story-2">
+    <button class="back-btn" onclick="goHome()">← Back to Stories</button>
+    <div class="story-header">
+      <div class="story-chapter">Chapter 3</div>
+      <h2 class="story-title" style="color:var(--cyan)">The Wizard's Spell 🌟</h2>
+      <div class="character-badge" style="background:rgba(6,182,212,.1);color:var(--cyan)">🧙 Meet Kai, the Young Wizard</div>
+      <div class="story-concept" style="background:rgba(6,182,212,.1);color:var(--cyan)">Python Concept: Loops</div>
+    </div>
+
+    <img class="story-infographic" src="images/loops-wizards-spell.jpg" alt="Loops - The Wizard's Spell Infographic" onclick="openLightbox(this.src)">
+
+    <div class="story-narration">
+      <p>Young wizard <span class="highlight">Kai</span> stood under the night sky. His teacher said: <em>"To light the stars, you must cast a repeating spell!"</em> 🌙</p>
+      <p style="margin-top:12px">A <span class="code-inline">for</span> loop repeats something a set number of times. A <span class="code-inline">while</span> loop repeats as long as a condition is true!</p>
+    </div>
+
+    <div class="code-scroll">
+      <pre><span class="cm"># Kai's star-lighting spell (for loop)</span>
 <span class="kw">for</span> <span class="fn">star</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="num">5</span>):
     <span class="bi">print</span>(<span class="str">f"⭐ Star </span><span class="op">{</span><span class="fn">star</span><span class="op">}</span><span class="str"> is glowing!"</span>)
 
@@ -485,216 +493,211 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 <span class="fn">dragons</span> <span class="op">=</span> <span class="num">3</span>
 <span class="kw">while</span> <span class="fn">dragons</span> <span class="op">></span> <span class="num">0</span>:
     <span class="bi">print</span>(<span class="str">f"🐉 Fighting dragon! </span><span class="op">{</span><span class="fn">dragons</span><span class="op">}</span><span class="str"> left"</span>)
-    <span class="fn">dragons</span> <span class="op">-=</span> <span class="num">1</span>    <span class="cm"># One dragon defeated!</span>
-<span class="bi">print</span>(<span class="str">"🎉 All dragons defeated!"</span>)</pre>
-      </div>
+    <span class="fn">dragons</span> <span class="op">-=</span> <span class="num">1</span></pre>
+    </div>
 
-      <div class="interactive-section">
-        <h3><span class="emoji">⭐</span> Cast the Star Spell! (for loop)</h3>
-        <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Watch Kai light stars one by one using <code>for star in range(5)</code></p>
-        <div class="stars-grid" id="stars-grid">
-          <div class="spell-star" id="star-0">⭐</div>
-          <div class="spell-star" id="star-1">⭐</div>
-          <div class="spell-star" id="star-2">⭐</div>
-          <div class="spell-star" id="star-3">⭐</div>
-          <div class="spell-star" id="star-4">⭐</div>
-        </div>
-        <div class="loop-counter" id="loop-counter">Ready to cast!</div>
-        <div class="spell-controls">
-          <button class="btn btn-primary" onclick="castStarSpell()">🪄 Cast Star Spell</button>
-          <button class="btn btn-outline" onclick="resetStars()">🔄 Reset</button>
-        </div>
-        <div class="spell-log" id="star-log"></div>
+    <div class="interactive-section">
+      <h3><span class="emoji">⭐</span> Cast the Star Spell! (for loop)</h3>
+      <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Watch Kai light stars one by one using <code>for star in range(5)</code></p>
+      <div class="stars-grid" id="stars-grid">
+        <div class="spell-star" id="star-0">⭐</div>
+        <div class="spell-star" id="star-1">⭐</div>
+        <div class="spell-star" id="star-2">⭐</div>
+        <div class="spell-star" id="star-3">⭐</div>
+        <div class="spell-star" id="star-4">⭐</div>
       </div>
-
-      <div class="interactive-section">
-        <h3><span class="emoji">🐉</span> Dragon Battle! (while loop)</h3>
-        <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Watch Kai fight dragons using <code>while dragons > 0</code></p>
-        <div class="stars-grid" id="dragons-grid">
-          <div class="spell-star" id="dragon-0">🐉</div>
-          <div class="spell-star" id="dragon-1">🐉</div>
-          <div class="spell-star" id="dragon-2">🐉</div>
-        </div>
-        <div class="loop-counter" id="dragon-counter">dragons = 3</div>
-        <div class="spell-controls">
-          <button class="btn btn-primary" onclick="fightDragons()">⚔️ Fight Dragons</button>
-          <button class="btn btn-outline" onclick="resetDragons()">🔄 Reset</button>
-        </div>
-        <div class="spell-log" id="dragon-log"></div>
+      <div class="loop-counter" id="loop-counter">Ready to cast!</div>
+      <div class="spell-controls">
+        <button class="btn btn-primary" onclick="castStarSpell()">🪄 Cast Star Spell</button>
+        <button class="btn btn-outline" onclick="resetStars()">🔄 Reset</button>
       </div>
+      <div class="spell-log" id="star-log"></div>
+    </div>
 
-      <div class="fun-fact">
-        <div class="ff-icon">💡</div>
-        <div>
-          <div class="ff-title">Fun Fact!</div>
-          <div class="ff-text"><code>range(5)</code> gives you numbers 0, 1, 2, 3, 4 — that's 5 numbers but starting from 0! Programmers love counting from zero. 🤓 You can also use <code>break</code> to stop a loop early and <code>continue</code> to skip one round!</div>
-        </div>
+    <div class="interactive-section">
+      <h3><span class="emoji">🐉</span> Dragon Battle! (while loop)</h3>
+      <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Watch Kai fight dragons using <code>while dragons > 0</code></p>
+      <div class="stars-grid" id="dragons-grid">
+        <div class="spell-star" id="dragon-0">🐉</div>
+        <div class="spell-star" id="dragon-1">🐉</div>
+        <div class="spell-star" id="dragon-2">🐉</div>
+      </div>
+      <div class="loop-counter" id="dragon-counter">dragons = 3</div>
+      <div class="spell-controls">
+        <button class="btn btn-primary" onclick="fightDragons()">⚔️ Fight Dragons</button>
+        <button class="btn btn-outline" onclick="resetDragons()">🔄 Reset</button>
+      </div>
+      <div class="spell-log" id="dragon-log"></div>
+    </div>
+
+    <div class="fun-fact">
+      <div class="ff-icon">💡</div>
+      <div>
+        <div class="ff-title">Fun Fact!</div>
+        <div class="ff-text"><code>range(5)</code> gives you numbers 0, 1, 2, 3, 4 — that's 5 numbers but starting from 0! You can also use <code>break</code> to stop a loop early and <code>continue</code> to skip one round!</div>
       </div>
     </div>
 
-    <!-- ==================== STORY 4: THE RECIPE BOOK ==================== -->
-    <div class="story-page" id="story-3">
-      <div class="story-header">
-        <div class="story-chapter">Chapter 4</div>
-        <h2 class="story-title" style="color:var(--green)">The Recipe Book 🧪</h2>
-        <div class="character-badge" style="background:rgba(16,185,129,.1);color:var(--green)">👩‍🍳 Meet Maya, the Magical Chef</div>
-        <div class="story-concept" style="background:rgba(16,185,129,.1);color:var(--green)">Python Concept: Functions</div>
-        <p class="story-intro">Chef Maya's recipe book is magical! Each recipe is a <strong>function</strong> — you give it ingredients (parameters) and it returns a delicious dish (return value)!</p>
+    <div class="story-nav">
+      <button class="nav-arrow" onclick="openStory(1)">← Previous</button>
+      <div class="nav-progress">
+        <div class="nav-dot" onclick="openStory(0)"></div>
+        <div class="nav-dot" onclick="openStory(1)"></div>
+        <div class="nav-dot active" onclick="openStory(2)"></div>
+        <div class="nav-dot" onclick="openStory(3)"></div>
+        <div class="nav-dot" onclick="openStory(4)"></div>
       </div>
+      <button class="nav-arrow" onclick="openStory(3)">Next Story →</button>
+    </div>
+  </div>
 
-      <div class="story-grid">
-        <div class="scene-card" id="scene-4">
-          <div class="scene-label">🧪 Maya's Kitchen — Pick ingredients!</div>
-        </div>
-        <div class="narration-card">
-          <div class="narration-text">
-            <p>Chef <span class="highlight">Maya</span> has a magical kitchen! Her recipe book contains special recipes called <strong>functions</strong>. 🍳</p>
-            <p style="margin-top:12px">Each recipe needs <em>ingredients</em> — in Python, we call these <span class="code-inline">parameters</span>. The recipe produces a dish — that's the <span class="code-inline">return value</span>!</p>
-            <p style="margin-top:12px">The best part? Once you write a recipe, you can <strong>reuse</strong> it anytime with different ingredients!</p>
-            <p style="margin-top:12px">Try mixing ingredients in Maya's cauldron! 🧙‍♀️</p>
-          </div>
-        </div>
-      </div>
+  <!-- STORY 4: THE RECIPE BOOK -->
+  <div class="story-view" id="story-3">
+    <button class="back-btn" onclick="goHome()">← Back to Stories</button>
+    <div class="story-header">
+      <div class="story-chapter">Chapter 4</div>
+      <h2 class="story-title" style="color:var(--green)">The Recipe Book 🧪</h2>
+      <div class="character-badge" style="background:rgba(16,185,129,.1);color:var(--green)">👩‍🍳 Meet Maya, the Magical Chef</div>
+      <div class="story-concept" style="background:rgba(16,185,129,.1);color:var(--green)">Python Concept: Functions</div>
+    </div>
 
-      <div class="code-scroll">
-        <pre><span class="cm"># Maya's magical recipe (a function!)</span>
+    <img class="story-infographic" src="images/functions-recipe-book.jpg" alt="Functions - The Recipe Book Infographic" onclick="openLightbox(this.src)">
+
+    <div class="story-narration">
+      <p>Chef <span class="highlight">Maya</span> has a magical kitchen! Her recipe book contains special recipes called <strong>functions</strong>. 🍳</p>
+      <p style="margin-top:12px">Each recipe needs <em>ingredients</em> — in Python, we call these <span class="code-inline">parameters</span>. The recipe produces a dish — that's the <span class="code-inline">return value</span>!</p>
+    </div>
+
+    <div class="code-scroll">
+      <pre><span class="cm"># Maya's magical recipe (a function!)</span>
 <span class="kw">def</span> <span class="fn">make_potion</span>(<span class="fn">ingredient</span>):
-    <span class="str">"""A recipe that takes an ingredient and returns a potion"""</span>
     <span class="fn">potion</span> <span class="op">=</span> <span class="str">"magical "</span> <span class="op">+</span> <span class="fn">ingredient</span> <span class="op">+</span> <span class="str">" potion"</span>
     <span class="kw">return</span> <span class="fn">potion</span>
 
 <span class="cm"># Call the function with different ingredients!</span>
-<span class="fn">drink1</span> <span class="op">=</span> <span class="fn">make_potion</span>(<span class="str">"starlight"</span>)   <span class="cm"># "magical starlight potion"</span>
-<span class="fn">drink2</span> <span class="op">=</span> <span class="fn">make_potion</span>(<span class="str">"moonbeam"</span>)    <span class="cm"># "magical moonbeam potion"</span>
+<span class="fn">drink1</span> <span class="op">=</span> <span class="fn">make_potion</span>(<span class="str">"starlight"</span>)
+<span class="fn">drink2</span> <span class="op">=</span> <span class="fn">make_potion</span>(<span class="str">"moonbeam"</span>)</pre>
+    </div>
 
-<span class="cm"># A recipe with multiple ingredients</span>
-<span class="kw">def</span> <span class="fn">make_cake</span>(<span class="fn">flavor</span>, <span class="fn">layers</span><span class="op">=</span><span class="num">3</span>):
-    <span class="kw">return</span> <span class="str">f"A </span><span class="op">{</span><span class="fn">layers</span><span class="op">}</span><span class="str">-layer </span><span class="op">{</span><span class="fn">flavor</span><span class="op">}</span><span class="str"> cake! 🎂"</span></pre>
+    <div class="interactive-section">
+      <h3><span class="emoji">🧪</span> Maya's Potion Lab!</h3>
+      <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Pick an ingredient to put into the <code>make_potion()</code> function:</p>
+      <div class="ingredient-shelf" id="ingredients">
+        <div class="ingredient" onclick="selectIngredient(this,'🌟 starlight')">🌟 starlight</div>
+        <div class="ingredient" onclick="selectIngredient(this,'🌙 moonbeam')">🌙 moonbeam</div>
+        <div class="ingredient" onclick="selectIngredient(this,'🔥 dragonfire')">🔥 dragonfire</div>
+        <div class="ingredient" onclick="selectIngredient(this,'❄️ frost')">❄️ frost</div>
+        <div class="ingredient" onclick="selectIngredient(this,'🌸 blossom')">🌸 blossom</div>
+        <div class="ingredient" onclick="selectIngredient(this,'⚡ thunder')">⚡ thunder</div>
       </div>
-
-      <div class="interactive-section">
-        <h3><span class="emoji">🧪</span> Maya's Potion Lab!</h3>
-        <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px">Pick an ingredient to put into the <code>make_potion()</code> function:</p>
-        <div class="ingredient-shelf" id="ingredients">
-          <div class="ingredient" onclick="selectIngredient(this,'🌟 starlight')">🌟 starlight</div>
-          <div class="ingredient" onclick="selectIngredient(this,'🌙 moonbeam')">🌙 moonbeam</div>
-          <div class="ingredient" onclick="selectIngredient(this,'🔥 dragonfire')">🔥 dragonfire</div>
-          <div class="ingredient" onclick="selectIngredient(this,'❄️ frost')">❄️ frost</div>
-          <div class="ingredient" onclick="selectIngredient(this,'🌸 blossom')">🌸 blossom</div>
-          <div class="ingredient" onclick="selectIngredient(this,'⚡ thunder')">⚡ thunder</div>
-        </div>
-        <div class="cauldron" id="cauldron">🧪</div>
-        <div style="text-align:center">
-          <button class="btn btn-gold" onclick="brewPotion()">🪄 Brew Potion!</button>
-        </div>
-        <div class="recipe-result" id="recipe-result"></div>
-        <div class="recipe-code-live" id="recipe-live">
-          <span class="cm"># Pick an ingredient above...</span><br>
-          <span>make_potion( ? )</span>
-        </div>
+      <div class="cauldron" id="cauldron">🧪</div>
+      <div style="text-align:center">
+        <button class="btn btn-gold" onclick="brewPotion()">🪄 Brew Potion!</button>
       </div>
-
-      <div class="fun-fact">
-        <div class="ff-icon">💡</div>
-        <div>
-          <div class="ff-title">Fun Fact!</div>
-          <div class="ff-text">Functions are like recipes you can use over and over! Python has built-in functions like <code>print()</code>, <code>len()</code>, and <code>input()</code>. When you write your own, use <code>def</code> (short for "define") to name your recipe!</div>
-        </div>
+      <div class="recipe-result" id="recipe-result"></div>
+      <div class="recipe-code-live" id="recipe-live">
+        <span class="cm"># Pick an ingredient above...</span><br>
+        <span>make_potion( ? )</span>
       </div>
     </div>
 
-    <!-- ==================== STORY 5: THE MAGICAL TOY BOX ==================== -->
-    <div class="story-page" id="story-4">
-      <div class="story-header">
-        <div class="story-chapter">Chapter 5</div>
-        <h2 class="story-title" style="color:var(--pink)">The Magical Toy Box 🎁</h2>
-        <div class="character-badge" style="background:rgba(236,72,153,.1);color:var(--pink)">🧸 Meet Zara and Her Toy Collection</div>
-        <div class="story-concept" style="background:rgba(236,72,153,.1);color:var(--pink)">Python Concept: Lists</div>
-        <p class="story-intro">Zara has an enchanted toy box with numbered slots! She can add, remove, and find toys — just like a <strong>list</strong> in Python!</p>
+    <div class="fun-fact">
+      <div class="ff-icon">💡</div>
+      <div>
+        <div class="ff-title">Fun Fact!</div>
+        <div class="ff-text">Functions are like recipes you can use over and over! Python has built-in functions like <code>print()</code>, <code>len()</code>, and <code>input()</code>. When you write your own, use <code>def</code> (short for "define") to name your recipe!</div>
       </div>
+    </div>
 
-      <div class="story-grid">
-        <div class="scene-card" id="scene-5">
-          <div class="scene-label">🎁 Zara's Toy Box — Manage the toys!</div>
-        </div>
-        <div class="narration-card">
-          <div class="narration-text">
-            <p><span class="highlight">Zara</span> received a magical toy box for her birthday! 🎂</p>
-            <p style="margin-top:12px">The toy box has <strong>numbered slots</strong> starting from 0. She can put toys in, take them out, count them, and find them by number!</p>
-            <p style="margin-top:12px">In Python, a <span class="code-inline">list</span> works just like this. It stores multiple items in order, and you can access them by their <strong>index</strong> (slot number)!</p>
-            <p style="margin-top:12px">Try managing Zara's toy box below! 🧸</p>
-          </div>
-        </div>
+    <div class="story-nav">
+      <button class="nav-arrow" onclick="openStory(2)">← Previous</button>
+      <div class="nav-progress">
+        <div class="nav-dot" onclick="openStory(0)"></div>
+        <div class="nav-dot" onclick="openStory(1)"></div>
+        <div class="nav-dot" onclick="openStory(2)"></div>
+        <div class="nav-dot active" onclick="openStory(3)"></div>
+        <div class="nav-dot" onclick="openStory(4)"></div>
       </div>
+      <button class="nav-arrow" onclick="openStory(4)">Next Story →</button>
+    </div>
+  </div>
 
-      <div class="code-scroll">
-        <pre><span class="cm"># Zara's toy box (a list!)</span>
+  <!-- STORY 5: THE MAGICAL TOY BOX -->
+  <div class="story-view" id="story-4">
+    <button class="back-btn" onclick="goHome()">← Back to Stories</button>
+    <div class="story-header">
+      <div class="story-chapter">Chapter 5</div>
+      <h2 class="story-title" style="color:var(--pink)">The Magical Toy Box 🎁</h2>
+      <div class="character-badge" style="background:rgba(236,72,153,.1);color:var(--pink)">🧸 Meet Zara and Her Toy Collection</div>
+      <div class="story-concept" style="background:rgba(236,72,153,.1);color:var(--pink)">Python Concept: Lists</div>
+    </div>
+
+    <img class="story-infographic" src="images/lists-toy-box.jpg" alt="Lists - The Magical Toy Box Infographic" onclick="openLightbox(this.src)">
+
+    <div class="story-narration">
+      <p><span class="highlight">Zara</span> received a magical toy box for her birthday! 🎂</p>
+      <p style="margin-top:12px">The toy box has <strong>numbered slots</strong> starting from 0. She can put toys in, take them out, count them, and find them by number!</p>
+      <p style="margin-top:12px">In Python, a <span class="code-inline">list</span> works just like this. It stores multiple items in order, and you can access them by their <strong>index</strong> (slot number)!</p>
+    </div>
+
+    <div class="code-scroll">
+      <pre><span class="cm"># Zara's toy box (a list!)</span>
 <span class="fn">toys</span> <span class="op">=</span> [<span class="str">"🧸 teddy"</span>, <span class="str">"🤖 robot"</span>, <span class="str">"🐉 dragon"</span>]
 
 <span class="cm"># Access by index (slot number)</span>
 <span class="bi">print</span>(<span class="fn">toys</span>[<span class="num">0</span>])       <span class="cm"># 🧸 teddy (first!)</span>
 <span class="bi">print</span>(<span class="fn">toys</span>[<span class="num">-1</span>])      <span class="cm"># 🐉 dragon (last!)</span>
 
-<span class="cm"># Add a toy</span>
-<span class="fn">toys</span>.<span class="fn">append</span>(<span class="str">"🦄 unicorn"</span>)  <span class="cm"># Add to the end</span>
-
-<span class="cm"># Remove a toy</span>
-<span class="fn">toys</span>.<span class="fn">remove</span>(<span class="str">"🤖 robot"</span>)   <span class="cm"># Find and remove</span>
-
-<span class="cm"># How many toys?</span>
+<span class="cm"># Add and remove toys</span>
+<span class="fn">toys</span>.<span class="fn">append</span>(<span class="str">"🦄 unicorn"</span>)
+<span class="fn">toys</span>.<span class="fn">remove</span>(<span class="str">"🤖 robot"</span>)
 <span class="bi">print</span>(<span class="bi">len</span>(<span class="fn">toys</span>))    <span class="cm"># 3 toys!</span></pre>
-      </div>
+    </div>
 
-      <div class="interactive-section">
-        <h3><span class="emoji">🎁</span> Zara's Toy Box!</h3>
-        <div class="toy-list-display" id="toy-list-code">toys = ["🧸 teddy", "🤖 robot", "🐉 dragon"]</div>
-        <div class="toybox" id="toybox"></div>
-        <div class="toy-controls">
-          <input type="text" class="toy-input" id="toy-input" placeholder="Toy name..." list="toy-suggestions">
-          <datalist id="toy-suggestions">
-            <option value="🦄 unicorn">
-            <option value="🚀 rocket">
-            <option value="🎸 guitar">
-            <option value="🧩 puzzle">
-            <option value="⚽ ball">
-            <option value="🎨 art set">
-          </datalist>
-          <button class="btn btn-primary btn-sm" onclick="addToy()">append()</button>
-          <button class="btn btn-outline btn-sm" onclick="removeToy()">remove()</button>
-          <button class="btn btn-outline btn-sm" onclick="popToy()">pop()</button>
-        </div>
-        <div class="toy-controls">
-          <input type="number" class="toy-input" id="toy-index" placeholder="Index..." min="0" style="width:100px">
-          <button class="btn btn-outline btn-sm" onclick="getToy()">toys[i]</button>
-          <button class="btn btn-outline btn-sm" onclick="toyLen()">len()</button>
-          <button class="btn btn-outline btn-sm" onclick="resetToys()">🔄 Reset</button>
-        </div>
-        <div class="toy-output" id="toy-output"></div>
+    <div class="interactive-section">
+      <h3><span class="emoji">🎁</span> Zara's Toy Box!</h3>
+      <div class="toy-list-display" id="toy-list-code">toys = ["🧸 teddy", "🤖 robot", "🐉 dragon"]</div>
+      <div class="toybox" id="toybox"></div>
+      <div class="toy-controls">
+        <input type="text" class="toy-input" id="toy-input" placeholder="Toy name..." list="toy-suggestions">
+        <datalist id="toy-suggestions">
+          <option value="🦄 unicorn">
+          <option value="🚀 rocket">
+          <option value="🎸 guitar">
+          <option value="🧩 puzzle">
+          <option value="⚽ ball">
+        </datalist>
+        <button class="btn btn-primary btn-sm" onclick="addToy()">append()</button>
+        <button class="btn btn-outline btn-sm" onclick="removeToy()">remove()</button>
+        <button class="btn btn-outline btn-sm" onclick="popToy()">pop()</button>
       </div>
+      <div class="toy-controls">
+        <input type="number" class="toy-input" id="toy-index" placeholder="Index..." min="0" style="width:100px">
+        <button class="btn btn-outline btn-sm" onclick="getToy()">toys[i]</button>
+        <button class="btn btn-outline btn-sm" onclick="toyLen()">len()</button>
+        <button class="btn btn-outline btn-sm" onclick="resetToys()">🔄 Reset</button>
+      </div>
+      <div class="toy-output" id="toy-output"></div>
+    </div>
 
-      <div class="fun-fact">
-        <div class="ff-icon">💡</div>
-        <div>
-          <div class="ff-title">Fun Fact!</div>
-          <div class="ff-text">Lists start counting at 0, not 1! So the first toy is <code>toys[0]</code>. You can also use negative numbers: <code>toys[-1]</code> gives the LAST item! It's like counting backwards. 🔄</div>
-        </div>
+    <div class="fun-fact">
+      <div class="ff-icon">💡</div>
+      <div>
+        <div class="ff-title">Fun Fact!</div>
+        <div class="ff-text">Lists start counting at 0, not 1! So the first toy is <code>toys[0]</code>. You can also use negative numbers: <code>toys[-1]</code> gives the LAST item! It's like counting backwards. 🔄</div>
       </div>
     </div>
 
-  </div>
-
-  <!-- Story Navigation -->
-  <div class="story-container">
     <div class="story-nav">
-      <button class="nav-arrow" id="nav-prev" onclick="prevStory()">← Previous Story</button>
+      <button class="nav-arrow" onclick="openStory(3)">← Previous</button>
       <div class="nav-progress">
-        <div class="nav-dot active" onclick="goToStory(0)"></div>
-        <div class="nav-dot" onclick="goToStory(1)"></div>
-        <div class="nav-dot" onclick="goToStory(2)"></div>
-        <div class="nav-dot" onclick="goToStory(3)"></div>
-        <div class="nav-dot" onclick="goToStory(4)"></div>
+        <div class="nav-dot" onclick="openStory(0)"></div>
+        <div class="nav-dot" onclick="openStory(1)"></div>
+        <div class="nav-dot" onclick="openStory(2)"></div>
+        <div class="nav-dot" onclick="openStory(3)"></div>
+        <div class="nav-dot active" onclick="openStory(4)"></div>
       </div>
-      <button class="nav-arrow" id="nav-next" onclick="nextStory()">Next Story →</button>
+      <button class="nav-arrow disabled">Next Story →</button>
     </div>
   </div>
 
@@ -710,16 +713,14 @@ body{font-family:'Fredoka',sans-serif;background:var(--bg);color:var(--text);ove
 // ========================================
 // STATE
 // ========================================
-let currentStory = 0;
-const totalStories = 5;
+let currentView = 'home'; // 'home' or story index
 let toyList = ['🧸 teddy', '🤖 robot', '🐉 dragon'];
 let selectedIngredient = null;
 let starSpellRunning = false;
 let dragonFightRunning = false;
-let packedItems = [];
 
 // ========================================
-// THREE.JS BACKGROUND
+// THREE.JS SUBTLE BACKGROUND
 // ========================================
 (function initThree() {
   const canvas = document.getElementById('three-canvas');
@@ -733,103 +734,51 @@ let packedItems = [];
 
   // Stars
   const starsGeo = new THREE.BufferGeometry();
-  const starsCount = 800;
+  const starsCount = 500;
   const positions = new Float32Array(starsCount * 3);
   const colors = new Float32Array(starsCount * 3);
-  const sizes = new Float32Array(starsCount);
   for (let i = 0; i < starsCount; i++) {
     positions[i * 3] = (Math.random() - 0.5) * 80;
     positions[i * 3 + 1] = (Math.random() - 0.5) * 80;
     positions[i * 3 + 2] = (Math.random() - 0.5) * 50;
     const c = new THREE.Color();
-    c.setHSL(0.6 + Math.random() * 0.3, 0.6, 0.7 + Math.random() * 0.3);
-    colors[i * 3] = c.r;
-    colors[i * 3 + 1] = c.g;
-    colors[i * 3 + 2] = c.b;
-    sizes[i] = Math.random() * 2 + 0.5;
+    c.setHSL(0.6 + Math.random() * 0.3, 0.5, 0.7 + Math.random() * 0.3);
+    colors[i * 3] = c.r; colors[i * 3 + 1] = c.g; colors[i * 3 + 2] = c.b;
   }
   starsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   starsGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-  const starsMat = new THREE.PointsMaterial({ size: 1.5, vertexColors: true, transparent: true, opacity: 0.6, sizeAttenuation: true });
+  const starsMat = new THREE.PointsMaterial({ size: 1.2, vertexColors: true, transparent: true, opacity: 0.5, sizeAttenuation: true });
   const stars = new THREE.Points(starsGeo, starsMat);
   scene.add(stars);
 
-  // Floating geometric shapes (story elements)
-  const shapes = [];
-  const geoTypes = [
-    new THREE.IcosahedronGeometry(0.8, 0),
-    new THREE.OctahedronGeometry(0.7, 0),
-    new THREE.TetrahedronGeometry(0.7, 0),
-    new THREE.DodecahedronGeometry(0.6, 0),
-    new THREE.TorusGeometry(0.5, 0.2, 8, 16),
-  ];
-  const matColors = [0x8b5cf6, 0xfbbf24, 0x06b6d4, 0xec4899, 0x10b981];
-  for (let i = 0; i < 12; i++) {
-    const geo = geoTypes[i % geoTypes.length];
-    const mat = new THREE.MeshBasicMaterial({
-      color: matColors[i % matColors.length],
-      wireframe: true,
-      transparent: true,
-      opacity: 0.15,
-    });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(
-      (Math.random() - 0.5) * 40,
-      (Math.random() - 0.5) * 40,
-      (Math.random() - 0.5) * 20 - 5
-    );
-    mesh.userData = {
-      rotSpeed: (Math.random() - 0.5) * 0.02,
-      floatSpeed: 0.3 + Math.random() * 0.5,
-      floatAmp: 0.5 + Math.random(),
-      startY: mesh.position.y,
-    };
-    scene.add(mesh);
-    shapes.push(mesh);
-  }
-
   // Sparkle particles
   const sparkleGeo = new THREE.BufferGeometry();
-  const sparkleCount = 100;
+  const sparkleCount = 60;
   const sparklePos = new Float32Array(sparkleCount * 3);
   const sparkleVel = [];
   for (let i = 0; i < sparkleCount; i++) {
     sparklePos[i * 3] = (Math.random() - 0.5) * 60;
     sparklePos[i * 3 + 1] = (Math.random() - 0.5) * 60;
     sparklePos[i * 3 + 2] = (Math.random() - 0.5) * 30;
-    sparkleVel.push({ x: (Math.random() - 0.5) * 0.02, y: Math.random() * 0.02 + 0.01, z: (Math.random() - 0.5) * 0.01 });
+    sparkleVel.push({ y: Math.random() * 0.02 + 0.005 });
   }
   sparkleGeo.setAttribute('position', new THREE.BufferAttribute(sparklePos, 3));
-  const sparkleMat = new THREE.PointsMaterial({ color: 0xfbbf24, size: 1, transparent: true, opacity: 0.4 });
-  const sparkles = new THREE.Points(sparkleGeo, sparkleMat);
-  scene.add(sparkles);
+  const sparkleMat = new THREE.PointsMaterial({ color: 0xfbbf24, size: 0.8, transparent: true, opacity: 0.35 });
+  scene.add(new THREE.Points(sparkleGeo, sparkleMat));
 
   let time = 0;
   function animate() {
     requestAnimationFrame(animate);
-    time += 0.01;
-
-    stars.rotation.y = time * 0.02;
-    stars.rotation.x = Math.sin(time * 0.1) * 0.02;
-
-    shapes.forEach(s => {
-      s.rotation.x += s.userData.rotSpeed;
-      s.rotation.y += s.userData.rotSpeed * 0.7;
-      s.position.y = s.userData.startY + Math.sin(time * s.userData.floatSpeed) * s.userData.floatAmp;
-    });
+    time += 0.008;
+    stars.rotation.y = time * 0.015;
+    stars.rotation.x = Math.sin(time * 0.08) * 0.015;
 
     const sPos = sparkleGeo.attributes.position.array;
     for (let i = 0; i < sparkleCount; i++) {
-      sPos[i * 3] += sparkleVel[i].x;
       sPos[i * 3 + 1] += sparkleVel[i].y;
-      sPos[i * 3 + 2] += sparkleVel[i].z;
-      if (sPos[i * 3 + 1] > 30) {
-        sPos[i * 3 + 1] = -30;
-        sPos[i * 3] = (Math.random() - 0.5) * 60;
-      }
+      if (sPos[i * 3 + 1] > 30) { sPos[i * 3 + 1] = -30; sPos[i * 3] = (Math.random() - 0.5) * 60; }
     }
     sparkleGeo.attributes.position.needsUpdate = true;
-
     renderer.render(scene, camera);
   }
   animate();
@@ -842,460 +791,41 @@ let packedItems = [];
 })();
 
 // ========================================
-// MINI THREE.JS SCENES FOR EACH STORY
-// ========================================
-function createMiniScene(containerId, setupFn) {
-  const container = document.getElementById(containerId);
-  if (!container) return null;
-  const w = container.clientWidth - 48;
-  const h = 300;
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(w, h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.domElement.style.borderRadius = '12px';
-  container.insertBefore(renderer.domElement, container.firstChild);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 100);
-
-  const ctx = { renderer, scene, camera, container, w, h };
-  setupFn(ctx);
-  return ctx;
-}
-
-// Scene 1: Backpack with floating pouches
-let scene1Objs = [];
-createMiniScene('scene-1', (ctx) => {
-  ctx.camera.position.set(0, 0, 8);
-  
-  // Ambient light
-  ctx.scene.add(new THREE.AmbientLight(0x8b5cf6, 0.5));
-  const light = new THREE.PointLight(0xfbbf24, 1, 20);
-  light.position.set(3, 3, 5);
-  ctx.scene.add(light);
-
-  // Backpack body
-  const backpack = new THREE.Mesh(
-    new THREE.BoxGeometry(2.5, 3, 1.5),
-    new THREE.MeshPhongMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.7, shininess: 80 })
-  );
-  backpack.position.y = -0.5;
-  ctx.scene.add(backpack);
-  scene1Objs.push(backpack);
-
-  // Straps
-  [-0.7, 0.7].forEach(x => {
-    const strap = new THREE.Mesh(
-      new THREE.BoxGeometry(0.15, 2, 0.1),
-      new THREE.MeshPhongMaterial({ color: 0x6d28d9 })
-    );
-    strap.position.set(x, 0.8, 0.8);
-    ctx.scene.add(strap);
-  });
-
-  // Pouches
-  const pouchData = [
-    { label: 'name', x: -1.8, y: 1.2, color: 0xfbbf24 },
-    { label: 'age', x: 0, y: 1.8, color: 0x06b6d4 },
-    { label: 'snack', x: 1.8, y: 1.2, color: 0x10b981 },
-    { label: 'has_map', x: -1.2, y: -0.5, color: 0xec4899 },
-    { label: 'coins', x: 1.2, y: -0.5, color: 0xf97316 },
-  ];
-  pouchData.forEach((p, i) => {
-    const pouch = new THREE.Mesh(
-      new THREE.SphereGeometry(0.4, 16, 16),
-      new THREE.MeshPhongMaterial({ color: p.color, transparent: true, opacity: 0.8, shininess: 100 })
-    );
-    pouch.position.set(p.x, p.y, 1);
-    pouch.userData = { startY: p.y, phase: i * 0.8 };
-    ctx.scene.add(pouch);
-    scene1Objs.push(pouch);
-  });
-
-  // Particles
-  const particleGeo = new THREE.BufferGeometry();
-  const pCount = 50;
-  const pPos = new Float32Array(pCount * 3);
-  for (let i = 0; i < pCount; i++) {
-    pPos[i * 3] = (Math.random() - 0.5) * 8;
-    pPos[i * 3 + 1] = (Math.random() - 0.5) * 6;
-    pPos[i * 3 + 2] = (Math.random() - 0.5) * 4;
-  }
-  particleGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const particleMat = new THREE.PointsMaterial({ color: 0xfbbf24, size: 0.08, transparent: true, opacity: 0.6 });
-  ctx.scene.add(new THREE.Points(particleGeo, particleMat));
-
-  let t = 0;
-  function anim() {
-    requestAnimationFrame(anim);
-    t += 0.015;
-    scene1Objs.forEach((obj, i) => {
-      if (i === 0) {
-        obj.rotation.y = Math.sin(t * 0.3) * 0.1;
-      } else {
-        obj.position.y = obj.userData.startY + Math.sin(t + obj.userData.phase) * 0.15;
-        obj.rotation.y = t * 0.5;
-      }
-    });
-    ctx.renderer.render(ctx.scene, ctx.camera);
-  }
-  anim();
-});
-
-// Scene 2: Dragon's cave
-createMiniScene('scene-2', (ctx) => {
-  ctx.camera.position.set(0, 0, 10);
-
-  ctx.scene.add(new THREE.AmbientLight(0xff6666, 0.3));
-  const fireLight = new THREE.PointLight(0xff4444, 1.5, 15);
-  fireLight.position.set(0, -1, 3);
-  ctx.scene.add(fireLight);
-  
-  // Cave opening (torus)
-  const cave = new THREE.Mesh(
-    new THREE.TorusGeometry(2.5, 0.5, 8, 32),
-    new THREE.MeshPhongMaterial({ color: 0x444444, shininess: 20 })
-  );
-  cave.position.z = -1;
-  ctx.scene.add(cave);
-
-  // Dragon body (cone)
-  const body = new THREE.Mesh(
-    new THREE.ConeGeometry(1.2, 2.5, 6),
-    new THREE.MeshPhongMaterial({ color: 0xef4444, shininess: 60 })
-  );
-  body.position.set(0, -0.5, 1);
-  ctx.scene.add(body);
-  
-  // Dragon head
-  const head = new THREE.Mesh(
-    new THREE.SphereGeometry(0.6, 8, 8),
-    new THREE.MeshPhongMaterial({ color: 0xdc2626 })
-  );
-  head.position.set(0, 1.2, 1.2);
-  ctx.scene.add(head);
-  
-  // Eyes
-  [-0.2, 0.2].forEach(x => {
-    const eye = new THREE.Mesh(
-      new THREE.SphereGeometry(0.12, 8, 8),
-      new THREE.MeshPhongMaterial({ color: 0xfbbf24, emissive: 0xfbbf24, emissiveIntensity: 0.5 })
-    );
-    eye.position.set(x, 1.35, 1.7);
-    ctx.scene.add(eye);
-  });
-
-  // Fire particles
-  const fireGeo = new THREE.BufferGeometry();
-  const fCount = 30;
-  const fPos = new Float32Array(fCount * 3);
-  const fVel = [];
-  for (let i = 0; i < fCount; i++) {
-    fPos[i * 3] = (Math.random() - 0.5) * 2;
-    fPos[i * 3 + 1] = -2 + Math.random() * 2;
-    fPos[i * 3 + 2] = Math.random() * 2;
-    fVel.push(Math.random() * 0.03 + 0.01);
-  }
-  fireGeo.setAttribute('position', new THREE.BufferAttribute(fPos, 3));
-  const fireMat = new THREE.PointsMaterial({ color: 0xff6600, size: 0.15, transparent: true, opacity: 0.6 });
-  const fire = new THREE.Points(fireGeo, fireMat);
-  ctx.scene.add(fire);
-
-  let t = 0;
-  function anim() {
-    requestAnimationFrame(anim);
-    t += 0.02;
-    head.position.y = 1.2 + Math.sin(t) * 0.1;
-    head.rotation.z = Math.sin(t * 0.7) * 0.1;
-    body.rotation.y = Math.sin(t * 0.3) * 0.05;
-    fireLight.intensity = 1 + Math.sin(t * 3) * 0.5;
-    
-    const fp = fireGeo.attributes.position.array;
-    for (let i = 0; i < fCount; i++) {
-      fp[i * 3 + 1] += fVel[i];
-      if (fp[i * 3 + 1] > 2) {
-        fp[i * 3 + 1] = -2;
-        fp[i * 3] = (Math.random() - 0.5) * 2;
-      }
-    }
-    fireGeo.attributes.position.needsUpdate = true;
-    ctx.renderer.render(ctx.scene, ctx.camera);
-  }
-  anim();
-});
-
-// Scene 3: Wizard with stars
-createMiniScene('scene-3', (ctx) => {
-  ctx.camera.position.set(0, 0, 10);
-  ctx.scene.add(new THREE.AmbientLight(0x06b6d4, 0.3));
-  const magicLight = new THREE.PointLight(0x06b6d4, 1, 15);
-  magicLight.position.set(0, 2, 5);
-  ctx.scene.add(magicLight);
-
-  // Wizard (cone body + sphere head)
-  const wizBody = new THREE.Mesh(
-    new THREE.ConeGeometry(1, 2.5, 8),
-    new THREE.MeshPhongMaterial({ color: 0x3b82f6 })
-  );
-  wizBody.position.set(-2, -1.5, 0);
-  ctx.scene.add(wizBody);
-
-  const wizHead = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 8, 8),
-    new THREE.MeshPhongMaterial({ color: 0xfcd34d })
-  );
-  wizHead.position.set(-2, 0.3, 0);
-  ctx.scene.add(wizHead);
-
-  // Wizard hat
-  const hat = new THREE.Mesh(
-    new THREE.ConeGeometry(0.6, 1.2, 8),
-    new THREE.MeshPhongMaterial({ color: 0x1d4ed8 })
-  );
-  hat.position.set(-2, 1.2, 0);
-  ctx.scene.add(hat);
-
-  // Wand
-  const wand = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.04, 0.04, 1.5, 8),
-    new THREE.MeshPhongMaterial({ color: 0xfbbf24, emissive: 0xfbbf24, emissiveIntensity: 0.3 })
-  );
-  wand.position.set(-1, 0, 0.5);
-  wand.rotation.z = -0.5;
-  ctx.scene.add(wand);
-
-  // Stars
-  const starMeshes = [];
-  for (let i = 0; i < 5; i++) {
-    const star = new THREE.Mesh(
-      new THREE.OctahedronGeometry(0.3, 0),
-      new THREE.MeshPhongMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.2, emissive: 0xfbbf24, emissiveIntensity: 0 })
-    );
-    const angle = (i / 5) * Math.PI * 1.2 - 0.3;
-    star.position.set(Math.cos(angle) * 3 + 1, Math.sin(angle) * 2 + 1, 0);
-    star.userData = { baseOpacity: 0.2, phase: i * 0.5 };
-    ctx.scene.add(star);
-    starMeshes.push(star);
-  }
-
-  // Magic particles
-  const mGeo = new THREE.BufferGeometry();
-  const mCount = 40;
-  const mPos = new Float32Array(mCount * 3);
-  for (let i = 0; i < mCount; i++) {
-    mPos[i * 3] = (Math.random() - 0.5) * 8;
-    mPos[i * 3 + 1] = (Math.random() - 0.5) * 6;
-    mPos[i * 3 + 2] = (Math.random() - 0.5) * 4;
-  }
-  mGeo.setAttribute('position', new THREE.BufferAttribute(mPos, 3));
-  ctx.scene.add(new THREE.Points(mGeo, new THREE.PointsMaterial({ color: 0x06b6d4, size: 0.08, transparent: true, opacity: 0.5 })));
-
-  let t = 0;
-  window._scene3Stars = starMeshes;
-  function anim() {
-    requestAnimationFrame(anim);
-    t += 0.015;
-    wand.rotation.z = -0.5 + Math.sin(t * 2) * 0.15;
-    starMeshes.forEach((s, i) => {
-      s.rotation.y = t;
-      s.position.y += Math.sin(t + s.userData.phase) * 0.002;
-    });
-    magicLight.intensity = 1 + Math.sin(t * 2) * 0.3;
-    ctx.renderer.render(ctx.scene, ctx.camera);
-  }
-  anim();
-});
-
-// Scene 4: Kitchen with cauldron
-createMiniScene('scene-4', (ctx) => {
-  ctx.camera.position.set(0, 0, 10);
-  ctx.scene.add(new THREE.AmbientLight(0x10b981, 0.3));
-  const potLight = new THREE.PointLight(0x10b981, 1.2, 15);
-  potLight.position.set(0, 0, 5);
-  ctx.scene.add(potLight);
-
-  // Chef Maya (cone + sphere)
-  const chefBody = new THREE.Mesh(
-    new THREE.ConeGeometry(0.8, 2, 8),
-    new THREE.MeshPhongMaterial({ color: 0x10b981 })
-  );
-  chefBody.position.set(-2.5, -1.5, 0);
-  ctx.scene.add(chefBody);
-
-  const chefHead = new THREE.Mesh(
-    new THREE.SphereGeometry(0.4, 8, 8),
-    new THREE.MeshPhongMaterial({ color: 0xfcd34d })
-  );
-  chefHead.position.set(-2.5, 0, 0);
-  ctx.scene.add(chefHead);
-
-  // Chef hat
-  const chefHat = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.35, 0.4, 0.7, 8),
-    new THREE.MeshPhongMaterial({ color: 0xffffff })
-  );
-  chefHat.position.set(-2.5, 0.7, 0);
-  ctx.scene.add(chefHat);
-
-  // Cauldron
-  const cauldron = new THREE.Mesh(
-    new THREE.SphereGeometry(1.5, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.7),
-    new THREE.MeshPhongMaterial({ color: 0x333333, side: THREE.DoubleSide })
-  );
-  cauldron.position.set(1, -1.5, 0);
-  cauldron.rotation.x = Math.PI;
-  ctx.scene.add(cauldron);
-
-  // Bubbling liquid
-  const liquid = new THREE.Mesh(
-    new THREE.CircleGeometry(1.2, 16),
-    new THREE.MeshPhongMaterial({ color: 0x10b981, transparent: true, opacity: 0.6, emissive: 0x10b981, emissiveIntensity: 0.3 })
-  );
-  liquid.position.set(1, -0.3, 0);
-  liquid.rotation.x = -Math.PI / 2;
-  ctx.scene.add(liquid);
-
-  // Bubbles
-  const bubbleObjs = [];
-  for (let i = 0; i < 8; i++) {
-    const bubble = new THREE.Mesh(
-      new THREE.SphereGeometry(0.1 + Math.random() * 0.1, 8, 8),
-      new THREE.MeshPhongMaterial({ color: 0x34d399, transparent: true, opacity: 0.5 })
-    );
-    bubble.position.set(1 + (Math.random() - 0.5) * 1.5, -0.2, (Math.random() - 0.5));
-    bubble.userData = { startY: bubble.position.y, speed: 0.5 + Math.random() };
-    ctx.scene.add(bubble);
-    bubbleObjs.push(bubble);
-  }
-
-  // Ingredient bottles
-  const bottleColors = [0xfbbf24, 0xef4444, 0x8b5cf6, 0x06b6d4];
-  bottleColors.forEach((c, i) => {
-    const bottle = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.15, 0.2, 0.6, 8),
-      new THREE.MeshPhongMaterial({ color: c, transparent: true, opacity: 0.7 })
-    );
-    bottle.position.set(-1 + i * 0.7, -2.5, 1);
-    ctx.scene.add(bottle);
-  });
-
-  let t = 0;
-  function anim() {
-    requestAnimationFrame(anim);
-    t += 0.02;
-    bubbleObjs.forEach(b => {
-      b.position.y += 0.01 * b.userData.speed;
-      b.position.x += Math.sin(t + b.userData.speed) * 0.003;
-      if (b.position.y > 1.5) {
-        b.position.y = b.userData.startY;
-      }
-    });
-    potLight.intensity = 1.2 + Math.sin(t * 3) * 0.2;
-    liquid.material.emissiveIntensity = 0.3 + Math.sin(t * 2) * 0.1;
-    ctx.renderer.render(ctx.scene, ctx.camera);
-  }
-  anim();
-});
-
-// Scene 5: Toy box
-createMiniScene('scene-5', (ctx) => {
-  ctx.camera.position.set(0, 0, 10);
-  ctx.scene.add(new THREE.AmbientLight(0xec4899, 0.3));
-  const toyLight = new THREE.PointLight(0xec4899, 1, 15);
-  toyLight.position.set(0, 2, 5);
-  ctx.scene.add(toyLight);
-
-  // Toy box
-  const box = new THREE.Mesh(
-    new THREE.BoxGeometry(5, 2.5, 2),
-    new THREE.MeshPhongMaterial({ color: 0xec4899, transparent: true, opacity: 0.4 })
-  );
-  box.position.set(0, -1, 0);
-  ctx.scene.add(box);
-
-  // Box lid (open)
-  const lid = new THREE.Mesh(
-    new THREE.BoxGeometry(5, 0.2, 2),
-    new THREE.MeshPhongMaterial({ color: 0xdb2777 })
-  );
-  lid.position.set(0, 0.5, -1);
-  lid.rotation.x = -0.8;
-  ctx.scene.add(lid);
-
-  // Toys (geometric shapes)
-  const toyShapes = [
-    { geo: new THREE.SphereGeometry(0.4, 8, 8), color: 0xfbbf24, x: -1.5 },      // teddy
-    { geo: new THREE.BoxGeometry(0.6, 0.8, 0.4), color: 0x94a3b8, x: 0 },        // robot
-    { geo: new THREE.ConeGeometry(0.4, 0.8, 6), color: 0x22c55e, x: 1.5 },       // dragon
-  ];
-  const toyMeshes = [];
-  toyShapes.forEach(ts => {
-    const mesh = new THREE.Mesh(ts.geo, new THREE.MeshPhongMaterial({ color: ts.color, shininess: 80 }));
-    mesh.position.set(ts.x, 0.3, 0);
-    mesh.userData = { startY: 0.3, startX: ts.x };
-    ctx.scene.add(mesh);
-    toyMeshes.push(mesh);
-  });
-
-  // Sparkles
-  const spGeo = new THREE.BufferGeometry();
-  const spCount = 30;
-  const spPos = new Float32Array(spCount * 3);
-  for (let i = 0; i < spCount; i++) {
-    spPos[i * 3] = (Math.random() - 0.5) * 6;
-    spPos[i * 3 + 1] = Math.random() * 4 - 1;
-    spPos[i * 3 + 2] = (Math.random() - 0.5) * 3;
-  }
-  spGeo.setAttribute('position', new THREE.BufferAttribute(spPos, 3));
-  ctx.scene.add(new THREE.Points(spGeo, new THREE.PointsMaterial({ color: 0xfbbf24, size: 0.08, transparent: true, opacity: 0.5 })));
-
-  // Index labels (small cubes)
-  for (let i = 0; i < 3; i++) {
-    const label = new THREE.Mesh(
-      new THREE.BoxGeometry(0.3, 0.3, 0.1),
-      new THREE.MeshPhongMaterial({ color: 0x06b6d4 })
-    );
-    label.position.set(-1.5 + i * 1.5, -1.8, 1.1);
-    ctx.scene.add(label);
-  }
-
-  let t = 0;
-  function anim() {
-    requestAnimationFrame(anim);
-    t += 0.015;
-    toyMeshes.forEach((m, i) => {
-      m.position.y = m.userData.startY + Math.sin(t + i) * 0.15;
-      m.rotation.y = t * (0.3 + i * 0.1);
-    });
-    ctx.renderer.render(ctx.scene, ctx.camera);
-  }
-  anim();
-});
-
-// ========================================
 // NAVIGATION
 // ========================================
-function goToStory(index) {
-  currentStory = index;
-  document.querySelectorAll('.story-page').forEach((p, i) => {
-    p.classList.toggle('active', i === index);
-  });
-  document.querySelectorAll('.chapter-btn').forEach((b, i) => {
-    b.classList.toggle('active', i === index);
-  });
-  document.querySelectorAll('.nav-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === index);
-  });
-  document.getElementById('nav-prev').classList.toggle('disabled', index === 0);
-  document.getElementById('nav-next').classList.toggle('disabled', index === totalStories - 1);
-  window.scrollTo({ top: document.getElementById('chapters').offsetTop - 20, behavior: 'smooth' });
+function goHome() {
+  document.getElementById('homepage').style.display = 'block';
+  document.querySelectorAll('.story-view').forEach(v => v.classList.remove('active'));
+  currentView = 'home';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function prevStory() { if (currentStory > 0) goToStory(currentStory - 1); }
-function nextStory() { if (currentStory < totalStories - 1) goToStory(currentStory + 1); }
+function openStory(index) {
+  document.getElementById('homepage').style.display = 'none';
+  document.querySelectorAll('.story-view').forEach(v => v.classList.remove('active'));
+  document.getElementById(`story-${index}`).classList.add('active');
+  currentView = index;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 // ========================================
-// STORY 1: MAGIC BACKPACK INTERACTIONS
+// LIGHTBOX
+// ========================================
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ========================================
+// STORY 1: MAGIC BACKPACK
 // ========================================
 function openPouch(el, name, value, emoji) {
   if (el.classList.contains('open')) return;
@@ -1304,106 +834,52 @@ function openPouch(el, name, value, emoji) {
   document.getElementById('var-output').innerHTML = `<span style="color:var(--purple)">${name}</span> = <span style="color:var(--green)">${value}</span> ✨`;
 }
 
-function packItem(el, itemText) {
-  if (el.classList.contains('placed')) return;
-  el.classList.add('placed');
-  packedItems.push(itemText);
-  const zone = document.getElementById('drop-zone');
-  const name = itemText.split(' ')[1];
-  zone.innerHTML = packedItems.map(it => {
-    const n = it.split(' ')[1];
-    return `<span class="placed-item">${n} = "${it}"</span>`;
-  }).join('');
-  document.getElementById('pack-output').innerHTML = `🎒 Packed! <span style="color:var(--purple)">${name}</span> = <span style="color:var(--green)">"${itemText}"</span>`;
-}
-
 // ========================================
-// STORY 2: DRAGON'S RIDDLE INTERACTIONS
+// STORY 2: DRAGON'S RIDDLE
 // ========================================
 function answerRiddle(btn, answer) {
   const result = document.getElementById('riddle-result');
-  const btns = document.querySelectorAll('#riddle-choices .choice-btn');
-  btns.forEach(b => b.classList.remove('correct', 'wrong', 'almost'));
-
+  document.querySelectorAll('#riddle-choices .choice-btn').forEach(b => b.classList.remove('correct', 'wrong', 'almost'));
   if (answer === 'friendship') {
     btn.classList.add('correct');
-    result.innerHTML = '✅ <strong>if password == "friendship":</strong> ✨ The cave door opens with a golden glow! "Welcome, friend!" says the dragon. 🐉💛';
-    result.style.background = 'rgba(16,185,129,.1)';
-    result.style.color = 'var(--green)';
+    result.innerHTML = '✅ <strong>if password == "friendship":</strong> ✨ The cave door opens! "Welcome, friend!" 🐉💛';
+    result.style.background = 'rgba(16,185,129,.1)'; result.style.color = 'var(--green)';
   } else if (answer === 'friend') {
     btn.classList.add('almost');
-    result.innerHTML = '🤔 <strong>elif password == "friend":</strong> "So close! The magic word is longer..." hints the dragon.';
-    result.style.background = 'rgba(249,115,22,.1)';
-    result.style.color = 'var(--orange)';
+    result.innerHTML = '🤔 <strong>elif password == "friend":</strong> "So close! The magic word is longer..."';
+    result.style.background = 'rgba(249,115,22,.1)'; result.style.color = 'var(--orange)';
   } else {
     btn.classList.add('wrong');
-    result.innerHTML = '❌ <strong>else:</strong> "Nope! That\'s not the word. Think about what makes friends special..." 🐉';
-    result.style.background = 'rgba(239,68,68,.1)';
-    result.style.color = 'var(--red)';
-  }
-  result.classList.add('show');
-}
-
-function answerRiddle2(btn, num) {
-  const result = document.getElementById('riddle-result-2');
-  const btns = document.querySelectorAll('#riddle-choices-2 .choice-btn');
-  btns.forEach(b => b.classList.remove('correct', 'wrong', 'almost'));
-
-  if (num > 7) {
-    btn.classList.add('correct');
-    result.innerHTML = `⭐ <strong>if stars > 7:</strong> "Wow, ${num} stars! That's a lot! The sky is extra bright tonight!" 🌟✨`;
-    result.style.background = 'rgba(16,185,129,.1)';
-    result.style.color = 'var(--green)';
-  } else if (num === 7) {
-    btn.classList.add('almost');
-    result.innerHTML = `🎯 <strong>elif stars == 7:</strong> "Exactly 7! A lucky number!" says the dragon. 🍀`;
-    result.style.background = 'rgba(249,115,22,.1)';
-    result.style.color = 'var(--orange)';
-  } else {
-    btn.classList.add('wrong');
-    result.innerHTML = `🌙 <strong>else:</strong> "Only ${num}? The sky is a bit dim tonight..." 😴`;
-    result.style.background = 'rgba(239,68,68,.1)';
-    result.style.color = 'var(--red)';
+    result.innerHTML = '❌ <strong>else:</strong> "Nope! Think about what makes friends special..." 🐉';
+    result.style.background = 'rgba(239,68,68,.1)'; result.style.color = 'var(--red)';
   }
   result.classList.add('show');
 }
 
 // ========================================
-// STORY 3: WIZARD'S SPELL INTERACTIONS
+// STORY 3: WIZARD'S SPELL
 // ========================================
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
 async function castStarSpell() {
   if (starSpellRunning) return;
   starSpellRunning = true;
   resetStars();
   const log = document.getElementById('star-log');
   const counter = document.getElementById('loop-counter');
-
   for (let i = 0; i < 5; i++) {
     await sleep(500);
-    const star = document.getElementById(`star-${i}`);
-    star.classList.add('lit');
+    document.getElementById(`star-${i}`).classList.add('lit');
     counter.innerHTML = `for star in range(5): <span style="color:var(--cyan)">star = ${i}</span>`;
     log.innerHTML += `<div class="log-line"><span class="log-iter">star = ${i}</span> → <span class="log-action">⭐ Star ${i} is glowing!</span></div>`;
     log.scrollTop = log.scrollHeight;
-
-    // Light up 3D scene stars too
-    if (window._scene3Stars && window._scene3Stars[i]) {
-      window._scene3Stars[i].material.opacity = 0.9;
-      window._scene3Stars[i].material.emissiveIntensity = 0.5;
-    }
   }
   counter.innerHTML = '🎉 Loop complete! All 5 stars are lit!';
   starSpellRunning = false;
 }
 
 function resetStars() {
-  for (let i = 0; i < 5; i++) {
-    document.getElementById(`star-${i}`).classList.remove('lit');
-    if (window._scene3Stars && window._scene3Stars[i]) {
-      window._scene3Stars[i].material.opacity = 0.2;
-      window._scene3Stars[i].material.emissiveIntensity = 0;
-    }
-  }
+  for (let i = 0; i < 5; i++) document.getElementById(`star-${i}`).classList.remove('lit');
   document.getElementById('star-log').innerHTML = '';
   document.getElementById('loop-counter').textContent = 'Ready to cast!';
 }
@@ -1415,13 +891,8 @@ async function fightDragons() {
   const log = document.getElementById('dragon-log');
   const counter = document.getElementById('dragon-counter');
   let dragons = 3;
-
-  // Light them up first
-  for (let i = 0; i < 3; i++) {
-    document.getElementById(`dragon-${i}`).classList.add('lit');
-  }
+  for (let i = 0; i < 3; i++) document.getElementById(`dragon-${i}`).classList.add('lit');
   await sleep(400);
-
   while (dragons > 0) {
     await sleep(700);
     dragons--;
@@ -1435,17 +906,13 @@ async function fightDragons() {
 }
 
 function resetDragons() {
-  for (let i = 0; i < 3; i++) {
-    document.getElementById(`dragon-${i}`).classList.remove('lit');
-  }
+  for (let i = 0; i < 3; i++) document.getElementById(`dragon-${i}`).classList.remove('lit');
   document.getElementById('dragon-log').innerHTML = '';
   document.getElementById('dragon-counter').textContent = 'dragons = 3';
 }
 
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
 // ========================================
-// STORY 4: RECIPE BOOK INTERACTIONS
+// STORY 4: RECIPE BOOK
 // ========================================
 function selectIngredient(el, name) {
   document.querySelectorAll('.ingredient').forEach(i => i.classList.remove('selected'));
@@ -1466,18 +933,16 @@ function brewPotion() {
   const emoji = selectedIngredient.split(' ')[0];
   cauldron.classList.add('brewing');
   cauldron.textContent = emoji;
-
   setTimeout(() => {
     cauldron.classList.remove('brewing');
     cauldron.textContent = '✨';
     document.getElementById('recipe-result').innerHTML = `${emoji} <strong>Magical ${cleanName} potion</strong> brewed! → return "magical ${cleanName} potion"`;
     document.getElementById('recipe-result').style.color = 'var(--gold)';
-    document.getElementById('recipe-live').innerHTML = `<span class="kw">def</span> <span class="fn">make_potion</span>(<span class="fn">"${cleanName}"</span>):\n    potion = "magical ${cleanName} potion"\n    <span class="kw">return</span> <span class="active-line">"magical ${cleanName} potion"  ✨</span>`;
   }, 1000);
 }
 
 // ========================================
-// STORY 5: TOY BOX INTERACTIONS
+// STORY 5: TOY BOX
 // ========================================
 function renderToyBox() {
   const box = document.getElementById('toybox');
@@ -1485,12 +950,7 @@ function renderToyBox() {
   if (toyList.length === 0) {
     box.innerHTML = '<span style="color:var(--text-dim)">Empty toy box! Add some toys.</span>';
   } else {
-    box.innerHTML = toyList.map((t, i) => `
-      <div class="toy-slot" onclick="highlightToy(${i})">
-        <div class="toy-emoji">${t.split(' ')[0]}</div>
-        <div class="toy-index">[${i}]</div>
-      </div>
-    `).join('');
+    box.innerHTML = toyList.map((t, i) => `<div class="toy-slot" onclick="highlightToy(${i})"><div class="toy-emoji">${t.split(' ')[0]}</div><div class="toy-index">[${i}]</div></div>`).join('');
   }
   display.textContent = `toys = [${toyList.map(t => `"${t}"`).join(', ')}]`;
 }
@@ -1514,7 +974,7 @@ function removeToy() {
   const val = input.value.trim();
   if (!val) { document.getElementById('toy-output').innerHTML = 'Type a toy name to remove!'; return; }
   const idx = toyList.indexOf(val);
-  if (idx === -1) { document.getElementById('toy-output').innerHTML = `❌ "${val}" not found in the list!`; return; }
+  if (idx === -1) { document.getElementById('toy-output').innerHTML = `❌ "${val}" not found!`; return; }
   toyList.splice(idx, 1);
   input.value = '';
   renderToyBox();
@@ -1525,16 +985,13 @@ function popToy() {
   if (toyList.length === 0) { document.getElementById('toy-output').innerHTML = '❌ Toy box is empty!'; return; }
   const popped = toyList.pop();
   renderToyBox();
-  document.getElementById('toy-output').innerHTML = `toys.pop() → removed "<span style="color:var(--red)">${popped}</span>" from end`;
+  document.getElementById('toy-output').innerHTML = `toys.pop() → removed "<span style="color:var(--red)">${popped}</span>"`;
 }
 
 function getToy() {
   const idx = parseInt(document.getElementById('toy-index').value);
   if (isNaN(idx)) { document.getElementById('toy-output').innerHTML = 'Enter an index number!'; return; }
-  if (idx < 0 || idx >= toyList.length) {
-    document.getElementById('toy-output').innerHTML = `❌ IndexError! Valid range: 0 to ${toyList.length - 1}`;
-    return;
-  }
+  if (idx < 0 || idx >= toyList.length) { document.getElementById('toy-output').innerHTML = `❌ IndexError! Valid: 0-${toyList.length - 1}`; return; }
   document.getElementById('toy-output').innerHTML = `toys[<span style="color:var(--purple)">${idx}</span>] = "<span style="color:var(--green)">${toyList[idx]}</span>"`;
 }
 
@@ -1549,11 +1006,11 @@ function resetToys() {
 }
 
 // ========================================
-// SPARKLE CURSOR EFFECT
+// SPARKLE CURSOR
 // ========================================
 document.addEventListener('click', (e) => {
-  const sparkles = ['✨', '⭐', '💫', '🌟'];
-  for (let i = 0; i < 3; i++) {
+  const sparkles = ['✨', '⭐', '💫'];
+  for (let i = 0; i < 2; i++) {
     const s = document.createElement('div');
     s.className = 'sparkle';
     s.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
@@ -1565,24 +1022,22 @@ document.addEventListener('click', (e) => {
 });
 
 // ========================================
-// KEYBOARD NAVIGATION
+// KEYBOARD NAV
 // ========================================
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') prevStory();
-  if (e.key === 'ArrowRight') nextStory();
+  if (typeof currentView === 'number') {
+    if (e.key === 'ArrowLeft' && currentView > 0) openStory(currentView - 1);
+    if (e.key === 'ArrowRight' && currentView < 4) openStory(currentView + 1);
+  }
 });
 
 // ========================================
 // INIT
 // ========================================
 renderToyBox();
-goToStory(0);
 
-// Remove loader
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
-  }, 1500);
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1200);
 });
 </script>
 </body>
